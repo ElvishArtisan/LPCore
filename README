@@ -1,1 +1,41 @@
 This is the README file for the LPCore package.
+
+LPCore is a server and application control framework for the line of audio
+engine products manufactured by Logitek Audio Systems
+[http://logitekaudio.com/], written for Linux.  It contains the following
+components:
+
+1) lpcored Daemon
+The message passing and control daemon.  It manages control messages between
+audio engines (LP1 protocol via RS-232C serial links) and external
+applications (LP2 protocol via TCP/IP links) and replaces the
+'Supervisor' application supplied by Logitek.
+
+2) LP Application Framework
+A library for interacting with one or more audio engines via lpcored(8).
+
+3) LPCore Monitor
+A GUI applet for montioring and originating LP2 messages.
+
+4) Sample Applications
+An 'application' in LPCore is a program that can be used to implement the
+kind of functionality provided by the 'Command Builder' application supplied
+by Logitek.  The following sample applications are provided:
+
+  LPAutoCue -- Automatic cue channel muting when a fader is turned on.
+
+  LPAutoRoute -- Automatically change one or more route assignments in
+                 response to a buss event.
+
+  LPGreenRoom -- Provide a virtual 'green room' for local and remote
+                 broadcast hosts.
+
+  LPMicControl -- Remote control microphones from a studio turrett panel.
+
+  LPNetRouter -- A complete studio and relay routing system for network
+                 head-end applications.
+
+  LPRemoteButton -- Generate one or more buss events in response to an
+                    originating buss event.
+
+  LPSwitch -- GUI Switcher control applet.
