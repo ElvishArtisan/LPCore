@@ -1,0 +1,296 @@
+2013-07-09 Fred Gleason <fredg@paravelsystems.com>
+	* Initial package creation.
+2013-07-09 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPCmdSwitch' class in 'lib/lpcmdswitch.cpp' and
+	'lib/lpcmdswitch.h'.
+	* Added an 'LPConfig' class in 'lib/lpconfig.cpp' and
+	'lib/lpconfig.h'.
+	* Added an 'LPProfile' class in 'lib/lpprofile.cpp' and
+	'lib/lpprofile.h'.
+	* Added an 'LPTTYDevice' class in 'lib/lpttydevice.cpp' and
+	'lib/lpttydevice.h'.
+2013-07-09 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'Engine' class in 'lpcored/engine.cpp' and
+	'lpcored.engine.h'.
+	* Added a 'Connection' class in 'lpcored/connection.cpp'
+	and 'lpcored/connection.h'.
+2013-07-09 Fred Gleason <fredg@paravelsystems.com>
+	* Added an lpcore(1) application in 'lpcore/'.
+2013-07-11 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented the 'Set Relay Pulse' [0xA2], 'Set Fader Level'
+	[0xAD], 'Turn On' [0xB2], 'Turn Off' [0xB3], 'Set Input
+	Assignment' [0xB4], 'Set Input Mode' [0xB5] LP1 commands.
+	* Implemented the 'Momentary Relay Closure' [0x51],
+	'Turn On' [0x52], 'Turn Off' [0x53], 'Set Input Source' [0x54],
+	'Set Input Mode' [0x55]. 'Set Fader Level' [0x56] and
+	'Write Text' [0x5C] LP2 commands.
+2013-07-11 Fred Gleason <fredg@paravelsystems.com>
+	* Added color highlighting to the history text in lpcore(1).
+2013-07-11 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented source device indirection in lpcored(8).
+2013-07-11 Fred Gleason <fredg@paravelsystems.com>
+	* Add core for running detached to lpcored(8).
+2013-07-11 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPConnection' class in 'lib/lpconnection.cpp'
+	and 'lib/lpconnection.h'.
+	* Modified lpcore(1) to use the 'LPConnection' class.
+2013-07-12 Fred Gleason <fredg@paravelsystems.com>
+	* Added support for command routing by surface to lpcored(8).
+2013-07-12 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented the 'Read Parameter' [0x09] LP2 command for
+	'Input Assign' [0x54], 'Input Mode' [0x55] and
+	'Fader Level' [0x56] in lpcored(8).
+2013-07-12 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented the 'Read Parameter' [0x09] LP2 command for
+	'Turn On' [0x52] and 'Turn Off' [0x53] in lpcored(8).
+2013-07-12 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented inter-client notification in lpcored(8).
+2013-07-12 Fred Gleason <fredg@paravelsystems.com>
+	* Added an lpvguest(1) application in 'lpvguest/'.
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented inter-client notification in lpvguest(8).
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Added an [Applications] section to lpcore.conf(5).
+	* Added an 'AppHost' class in 'lpcored/apphost.cpp' and
+	'lpcored/apphost.h'.
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Added rules for explicit library versioning in 'configure.in'
+	and 'lib/Makefile.am'.
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented 'make rpm' rule in 'Makefile.am'.
+	* Moved relative path of liblpcore library includes to
+	'lpcore/'.
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented the 'Effects Level' [0x5A], LP2 command for
+	'mix minus' effects type in lpcored(8).
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in lpvguest(1) that broke return state messages.
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPConfig::surfaceByChannel()' static method in
+	'lib/lpconfig.cpp' and 'lib/lpconfig.h'.
+	* Removed the 'Engine::surfaceByChannel()' static method from
+	'lpcored/engine.cpp' and 'lpcored/engine.h'.
+2013-07-16 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in 'lpcored/lpcored.cpp' that used the incorrect
+	command code for the 'Effects Level' [0x5A] LP2 command.
+2013-07-18 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented connection authentication in lpcored(8) and
+	lpcore(1).
+	* Changed the LP2 TCP port to 10212.
+	* Removed vguest(1).
+2013-07-18 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in 'lpcore.spec.in'.
+2013-07-18 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'lpcore.pc'.
+2013-07-18 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in lpcored(8) that broke the 'Effects Level' [0x5A]
+	LP2 command for setting mix-minus source bus (type 20).
+2013-07-20 Fred Gleason <fredg@paravelsystems.com>
+	* Changed location of lpcore.conf(5) from '/etc/lpcore.conf' to
+	'/etc/lp/lpcore.conf'.
+2013-07-23 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'LPProfile::addressValue()' methods in
+	'lib/lpcore/lpprofile.cpp' and 'lib/lpcore/lpprofile.h'.
+2013-07-23 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPSwitcher' class in 'lib/lpcore/lpswitcher.cpp' and
+	'lib/lpcore/lpswitcher.h'.
+	* Added a factory function in 'lib/lpcore/lpswitcherfactory.cpp'
+	and 'lib/lpcore/lpswitcherfactory.h'.
+	* Added a switcher driver for the BroadcastTools SS8.2 Dual
+	Stereo Audio Switcher in 'lib/lpcore/btss82.cpp' and
+	'lib/lpcore/btss82.h'.
+	* Added 'docs/SWITCHERS.txt'.
+2013-07-25 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPMessage' class in 'lib/lpcore/lpmessage.cpp'
+	and 'lib/lpcore/lpmessage.h'.
+2013-07-25 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'LPMessage::bus()' method in 'lib/lpcore/lpmessage.cpp'
+	and 'lib/lpcore/lpmessage.h'.
+2013-07-25 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in 'lib/lpcore/lpparser.cpp' that threw a segfault
+	when attempting to validate a zero-length LP message.
+	* Added code in 'lpcore/lpcore.cpp' to insert a blank line into
+	the history when pressing ENTER on an empty input line.
+2013-07-30 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'docs/BUSSES.txt'.
+2013-07-30 Fred Gleason <fredg@paravelsystems.com>
+	* Added a capture for the 'Set Meter Group' [0xC2] LP1 message
+	in 'lpcored/lpcored.cpp'.
+	* Fixed a bug in 'lpcored/engine.cpp' and 'lpcored.h' that
+	caused a segfault when processing buss numbers larger than 127.
+2013-07-30 Fred Gleason <fredg@paravelsystems.com>
+	* Added code to lpcored(8) delay internal application startup
+	until all engines have been reset.
+2013-08-01 Fred Gleason <fredg@paravelsystems.com>
+	* Added LPMessage::dump() methods in 'lib/lpcore/lpmessage.cpp'
+	and 'lib/lpcore/lpmessage.h'.
+	* Added code to validate message length in
+	'lib/lpcore/lpmessage.cpp'.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Renamed the 'LPMessage::bus()' method to 'LPMessage::buss()'
+	in 'lib/lpcore/lpmessage.cpp' and 'lib/lpcore/lpmessage.h'.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in lpcored(8) that threw a segfault when an LP2
+	client referenced a non-existent engine.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Changed name of 'docs/BUSSES..txt' to 'docs/BUSSES.txt'.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 0.9.0.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Removed unknown 'QAbstractSocket::SocketError' values in
+	'lib/lpcore/lpconnection.cpp' to allow building under CentOS 5.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Moved the icons from the 'gui' to the base RPM package in
+	'lpcore.spec.in'.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 0.9.1.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a warning in 'lib/lpcore/lpconnection.cpp'.
+2013-08-02 Fred Gleason <fredg@paravelsystems.com>
+	* Updated 'INSTALL'.
+2013-08-07 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPParser::metadataReceived()' signal in
+	'lib/lpcore/lpparser.cpp' and 'lib/lpcore/lpparser.h'.
+	* Added a 'Context' control to lpcore(1).
+	* Added a 'Clear' button to lpcore(1).
+	* Added 'LPConnection::context()' and 'LPConnection::setContext()'
+	methods in 'lib/lpcore/lpconnection.cpp' and
+	'lib/lpcore/lpconnection.h'.
+	* Added an 'LPConnection::Context' enum in
+	'lib/lpcore/lpconnection.h'.
+2013-08-07 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented CURRENT to '1' in 'configure.in'.
+	* Incremented AGE to '1' in 'configure.in'.
+	* Incremented the package version to 1.0.0.
+2013-08-07 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in 'lpcore.spec.in' that broke the 'make rpm'
+	target.
+2013-08-07 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 1.0.1.
+2013-08-07 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in 'lib/lpcore/lpmessage.cpp' that broke the
+	'LPMessage::isValid()' method for variable-length messages.
+2013-08-07 Fred Gleason <fredg@paravelsystems.com>
+	* Changed BTSS82_POLL_INTERVAL from '200' to '300' in
+	lib/lpcore/switcher_btss82.h'.
+2013-08-08 Fred Gleason <fredg@paravelsystems.com>
+	* Changed the hardware device id for the Broadcast Tools
+	SS 8.2 switcher driver from '1' to '0'.
+2013-08-09 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPEngine' class in 'lib/lpcore/lpengine.cpp'
+	and 'lib/lpcore/lpengine.h'.
+	* Added a 'Send Full State' [0x02] metadata command in
+	'docs/METADATA.txt'.
+	* Added a '--track-state' switch to lpcore(1).
+2013-08-09 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'lpengine.h' to 'include_HEADERS' in
+	'lib/lpcore/Makefile.am'.
+2013-08-13 Fred Gleason <fredg@paravelsystems.com>
+	* Added code to check for referencing of non-existent engines
+	in lpcored(8).
+2013-08-20 Fred Gleason <fredg@paravelsystems.com>
+	* Added code to ping engines regularly to lpcored(8).
+2013-08-20 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented CURRENT to '2' in 'configure.in'.
+	* Incremented AGE to '2' in 'configure.in'.
+	* Incremented the package version to 1.1.0.
+2013-08-20 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed bug in 'rc.lpcored.in'.
+2013-08-20 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in lpcored(8) to caused internal applications to
+	not be stopped when exiting.
+2013-08-20 Fred Gleason <fredg@paravelsystems.com>
+	* Added lpswitch(1).
+2013-08-21 Fred Gleason <fredg@paravelsystems.com>
+	* Added support for the 360 Systems AM-16/B Audio Crosspoint Switcher
+	in 'lib/lpcore/switcher_am16.cpp' and 'lib/lpcore/switcher_am16.h'.
+2013-08-21 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented REVISION to '1' in 'configure.in'.
+	* Incremented the package version to 1.1.1.
+2013-08-28 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'LPSwitcher::dialLine()','LPSwitcher::dropLine()',
+	'LPSwitcher::lineState()', 'LPSwitcher::dialedString()',
+	'LPSwitcher::isLocked()', 'LPSwitcher::typeString()',
+	and 'LPSwitcher::lineStateString()' methods.
+	* Added a switcher driver for the Telos Zephyr Classic in
+	'lib/lpcore/switcher_zephyrclassic.cpp' and
+	'lib/lpcore/switcher_zephyrclassic.h'.
+2013-09-06 Fred Gleason <fredg@paravelsystems.com>
+	* Added codec parameter methods to LPSwitcher.
+	* Added a switcher driver for the Telos Zephyr Xtreme in
+	'lib/lpcore/switcher_zephyrxtreme.cpp' and
+	'lib/lpcore/switcher_zephyrxtreme.h'.
+2013-09-09 Fred Gleason <fredg@paravelsystems.com>
+	* Added a switcher driver for GPIO driver driven gpio devices in
+	'lib/lpcore/switcher_gpio.cpp' and 'lib/lpcore/switcher_gpio.h'.
+2013-09-09 Fred Gleason <fredg@paravelsystems.com>
+	* Added a GPI indicator display to lpswitch(1).
+2013-09-09 Fred Gleason <fredg@paravelsystems.com>
+	* Removed debugging printf() statements from
+	'lib/lpcore/switcher_gpio.cpp', 'lib/lpcore/switcher_zephyrclassic.cpp'
+	and 'lib/lpcore/switcher/zephyrxtreme.cpp'.
+2013-09-13 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the library version to 3:0:3.
+	* Incremented the package version to 1.2.0.
+2013-11-05 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'Connection Ping' metadata command in
+	'lpcored/connection.cpp' and 'lpcored/connection.h'.
+2013-11-05 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the library version to 3:0:3.
+	* Incremented the package version to 1.2.1.
+2013-11-21 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'docs/TEXT.txt'.
+	* Added 'LPMessage::text()' methods in 'lib/lpcore/lpmessage.cpp'
+	and 'lib/lpcore/lpmessage.h'.
+2013-11-21 Fred Gleason <fredg@paravelsystems.com>
+	* Added code in 'lpcore/lpcore.cpp' to interpret literal string
+	input characters when processing a 'Write Text' ['0x5C']
+	message.
+2013-11-21 Fred Gleason <fredg@paravelsystems.com>
+	* Added lpautocue application in 'lpautocue/'.
+	* Added lpgreenroom application in 'lpgreenroom/'.
+	* Added lpmiccontrol application in 'lpmiccontrol/'.
+	* Added lpnetrouter application in 'lpnetrouter/'.
+	* Added lpremoterouter application in 'lpremotebutton/'.
+2013-11-21 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the library version to 4:0:4.
+	* Incremented the package version to 1.3.0.
+2013-11-21 Fred Gleason <fredg@paravelsystems.com>
+	* Added lpautoroute application in 'lpautoroute/'.
+2013-11-21 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 1.3.1.
+2013-12-31 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPConfig::engineType()' method in 'lib/lpcore/lpconfig.cpp'
+	and 'lib/lpcore/lpconfig.h'.
+	* Split the Logitek Audio Engine driver in 'lpcored/engine.cpp' and
+	'lpcored/engine.h' into an abstract base class and hardware
+	specific class.
+2013-12-31 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'SwitcherEngine' engine driver in
+	'lpcored/switcher_engine.cpp' and 'lpcored/switcher_engine.h'.
+2013-12-31 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'ENGINES.txt' in 'docs/Makefile.am'.
+2013-12-31 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the library version to 5:0:5.
+	* Incremented the package version to 1.4.0.
+2014-01-13 Fred Gleason <fredg@paravelsystems.com>
+	* Changed 'BTSS82_POLL_INTERVAL' from '300' to '500' in
+	'lib/libcore/switcher_bt82.h'.
+2014-01-13 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the library version to 5:1:5.
+	* Incremented the package version to 1.4.1.
+2014-01-13 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'Udp<n>RewriteRule<p>=' directive to lpnetrouter.conf(5)
+	in 'lpnetrouter/destination.cpp' and 'lpnetrouter/destination.h'.
+2014-01-13 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 1.4.2.
+2014-03-10 Fred Gleason <fredg@paravelsystems.com>
+	* Adjusted the polling code in 'lib/libcore/switcher_bt82.h' to
+	provide an equal interval between requests for source, PIP and silence
+	sense status.
+2014-03-10 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 1.4.3.
+2014-03-17 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in 'lpnetrouter/source.cpp' that broke UDP forwarding.
+2014-03-17 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 1.4.4.

@@ -1,0 +1,98 @@
+                  Switcher Application Notes for LPCore
+
+The following devices are supported as switchers under LPCore:
+
+360 Systems AM-16/B Audio Crosspoint Switcher
+Broadcast Tools SS 8.2 Dual Stereo Audio Switcher
+Telos Zephyr Classic Digital Network Audio Tranceiver
+Telos Zephyr Xtreme Digital Network Audio Tranceiver
+
+See the sections below for notes on each specific model.
+
+----------------------------------------------------------------------------
+360 SYSTEMS AM-16/B AUDIO CROSSPOINT SWITCHER
+
+Type ID: 1
+
+GENERAL NOTES:
+Control is done by means of MIDI connections to the 'MIDI IN' and
+'MIDI OUT' ports on the back of the unit, with the appropriate MIDI device
+specified in the LPSwitcher::open() call.  The following settings should be
+configured on the AM-16/B:
+
+       Control Port Type: MIDI (jumper JMP1)
+       Program Send: OFF
+       Receive Channel: o (Omni mode, center display in Receive Channel 
+                           Mode)
+       Unit Address: 1 (Right display in Receive Channel mode)
+       Memory Protect: OFF
+
+The driver uses MIDI programs '0' and '1' on the AM-16/B when processing
+crosspoint changes; anything previously saved in those programs will
+be overwritten!
+
+
+----------------------------------------------------------------------------
+Broadcast Tools SS 8.2 Dual Stereo Audio Switcher
+
+Type ID: 0
+
+GENERAL NOTES:
+Control is done by means of an RS-232C connection to a four pin RJ11
+modular jack on the back of the unit (an adapter to a standard DB9
+connector is supplied by Broadcast Tools with the unit).  Serial port
+speed on the SS 8.2 should be set to 19200 (some have found 9600 to work
+instead).  Do *not* use 38400, as there are known bugs within the SS 8.2
+when used with this speed!  Serial port parameters should be set to
+19200 baud rate (or 9600 if that worked instead), No parity, 8 data
+bits, 1 stop bit.
+
+Internal switch settings should be as follows:
+
+ SW14-1: OFF   ID = 0
+ SW14-2: OFF
+ SW14-3: OFF
+ SW14-4: OFF   Interlock Mode
+ SW14-5: ON
+ SW14-6: OFF   Output Port Control
+ SW14-7: OFF   N/A
+ SW14-8: OFF   Pulse Stretcher OFF
+ SW14-9: OFF   Alternate Mode OFF
+SW14-10: See below
+
+If you wish to use GPI (referred to as 'PIP', for 'Parallel Input Port'
+in the Broadcast Tools documentation), then you will also need to be sure
+that DIP switch SW-14-10 is ON, whereas leaving it OFF allows crosspoints
+to be selected by means of closures at these inputs.
+
+
+----------------------------------------------------------------------------
+GPIO Driver-Driven General Purpose Input/Output Cards
+
+Type ID: 4
+
+GENERAL NOTES:
+Cards supported by the 'gpio' kernel driver package.
+
+----------------------------------------------------------------------------
+Telos Zephyr Classic Digital Network Audio Tranceiver
+
+Type ID: 2
+
+GENERAL NOTES:
+Control is done by means of an RS-232C connection to the 'RS232 REMOTE'
+connector on the back of the unit (three wire, null modem).  Default 
+serial port speed on the Zephyr is 9600.  Serial port parameters should
+be set to no parity, 8 data bits, 1 stop bit.
+
+
+----------------------------------------------------------------------------
+Telos Zephyr Xtreme Digital Network Audio Tranceiver
+
+Type ID: 3
+
+GENERAL NOTES:
+Control is done by means of an RS-232C connection to the 'RS232 REMOTE'
+connector on the back of the unit (three wire, null modem) or by
+TCP/IP connection.  Default serial port speed on the Zephyr is 9600.
+Serial port parameters should be set to no parity, 8 data bits, 1 stop bit.

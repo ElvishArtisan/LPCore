@@ -1,0 +1,29 @@
+                       Logitek Text Field Addresses
+
+-----------------------------------------------------------------------------
+ROC-5 and ROC-10
+-----------------------------------------------------------------------------
+"TIMER/CUE" DISPLAY
+  Device: 0x0028
+  Line Number: 0x00
+  Lines: 1
+  Column Number: 0x00
+  Width: 10
+  Attributes: None [0x00]
+
+-----------------------------------------------------------------------------
+REMORA
+-----------------------------------------------------------------------------
+PER-FADER DISPLAYS
+  Device: Fader Device
+  Top Area Line Number: 0
+  Top Area Lines: 2
+  Width: 44
+  Attributes:
+
+  Middle Fader Label: 2
+  Middle Fader Label Lines: 1
+  Width: 8
+
+  Large Top Lines
+  

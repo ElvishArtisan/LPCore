@@ -1,0 +1,28 @@
+; lpremotebutton.conf
+;
+; This is the sample configuration file for the LPRemoteButton application
+;
+
+[Server]
+Hostname=127.0.0.1
+ProfileName=lpremotebutton
+Password=letmein
+Port=10212
+
+[Button1]
+; TriggerType=Level | Rising | Falling
+;
+TriggerType=Level
+
+SourceEngine=1
+SourceSurface=0
+SourceDevice=0x0002
+SourceBuss=1
+
+; TriggerAction<n>=Normal | Invert | Momentary
+;
+TriggerAction1=Normal
+DestinationEngine1=1
+DestinationSurface1=0
+DestinationDevice1=0x0001
+DestinationBuss1=1

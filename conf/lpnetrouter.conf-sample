@@ -1,0 +1,303 @@
+; lpnetrouter.conf
+;
+; This is the sample configuration file for the LPNetRouter application
+;
+
+; LPCore Server Connection
+;
+[Server]
+Hostname=127.0.0.1
+ProfileName=lpnetrouter
+Password=letmein
+Port=10212
+
+; Switcher Parameters
+;
+[Switcher]
+
+; Type=<type>
+;
+; See the documentation with the LPCore package for the list of available
+; switcher types.
+;
+Type=0
+
+; Device=<dev>
+;
+; The device name to use to connect to the switcher.
+;
+Device=/dev/ttyS0
+
+
+; RML Interface
+;
+; The 'Switch Take' ['ST'] and 'Set GPO' ['GO'] RMLs can be used to control
+; the main switcher directly, bypassing all context logic.
+;
+; When emitting strings for RML, the following wildcards can be used:
+;
+;   %src_num - The source number.
+;   %src_name - The source name.
+;   %dst_num - The destination number.
+;   %dst_name - The destination name.
+;   %relay_num - The relay number.
+;
+[Rml]
+Port=5859
+MatrixNumber=0
+
+DestinationAddress1=192.168.10.30
+DestinationPort1=5859
+
+
+[Source1]
+; Name = <button-label>
+;
+; The legend to show on the button in LPPanel
+;
+Name=SRC 1
+
+
+; SourceAddress<n>=<ip-address>
+;
+; List of IP addresses to associate with this source.  LPPanel will use
+; this to determine which locations are able to arm a given source.
+;
+SourceAddress1=192.168.10.30
+OnAirSourceEngine1=1
+OnAirSourceSurface1=1
+OnAirSourceDevice1=0x0100
+OnAirSourceBuss1=0
+OnAirOnRml1=TA 1!
+OnAirOffRml1=TA 0!
+
+;
+; GPI to sense for relay activation
+;
+Relay1Engine=1
+Relay1Surface=0
+Relay1Device=0x0002
+Relay1Buss=4
+
+;
+; Surface button to sense for manual relay operation
+;
+Relay1ButtonEngine=1
+Relay1ButtonSurface=1
+Relay1ButtonDevice=0x0028
+Relay1ButtonBuss=35
+
+;
+; Surface lamp to use to indicate relay activation
+;
+Relay1LampEngine=1
+Relay1LampSurface=1
+Relay1LampDevice=0x0027
+Relay1LampBuss=35
+
+;
+; "Direct" Relay Output -- bypasses CR switcher state
+;
+Relay1DirectEngine=1
+Relay1DirectSurface=0
+Relay1DirectDevice=0x0027
+Relay1DirectBuss=8
+
+
+Relay2Engine=1
+Relay2Surface=0
+Relay2Device=0x0002
+Relay2Buss=5
+
+Relay2ButtonEngine=1
+Relay2ButtonSurface=1
+Relay2ButtonDevice=0x0028
+Relay2ButtonBuss=36
+
+Relay2LampEngine=1
+Relay2LampSurface=1
+Relay2LampDevice=0x0027
+Relay2LampBuss=36
+
+Relay2DirectEngine=1
+Relay2DirectSurface=0
+Relay2DirectDevice=0x0027
+Relay2DirectBuss=9
+
+
+Relay3Engine=1
+Relay3Surface=0
+Relay3Device=0x0002
+Relay3Buss=6
+
+Relay3ButtonEngine=1
+Relay3ButtonSurface=1
+Relay3ButtonDevice=0x0028
+Relay3ButtonBuss=37
+
+Relay3LampEngine=1
+Relay3LampSurface=1
+Relay3LampDevice=0x0027
+Relay3LampBuss=37
+
+Relay3DirectEngine=1
+Relay3DirectSurface=0
+Relay3DirectDevice=0x0027
+Relay3DirectBuss=10
+
+
+Relay4Engine=1
+Relay4Surface=0
+Relay4Device=0x0002
+Relay4Buss=7
+
+Relay4ButtonEngine=1
+Relay4ButtonSurface=1
+Relay4ButtonDevice=0x0028
+Relay4ButtonBuss=37
+
+Relay4LampEngine=1
+Relay4LampSurface=1
+Relay4LampDevice=0x0027
+Relay4LampBuss=38
+
+Relay4DirectEngine=1
+Relay4DirectSurface=0
+Relay4DirectDevice=0x0027
+Relay4DirectBuss=8
+
+
+; List of valid source addresses for the given UDP forwarder.  See
+; the [Udp<n>] section for an explantion of how this works.
+;
+Udp1Address1=192.168.10.30
+
+
+[Source2]
+Name=SRC 2
+
+Relay1Engine=3
+Relay1Surface=0
+Relay1Device=0x0002
+Relay1Buss=4
+
+Relay1ButtonEngine=3
+Relay1ButtonSurface=1
+Relay1ButtonDevice=0x0028
+Relay1ButtonBuss=35
+
+Relay1LampEngine=1
+Relay1LampSurface=1
+Relay1LampDevice=0x0027
+Relay1LampBuss=35
+
+
+Relay2Engine=3
+Relay2Surface=0
+Relay2Device=0x0002
+Relay2Buss=5
+
+Relay2ButtonEngine=3
+Relay2ButtonSurface=1
+Relay2ButtonDevice=0x0028
+Relay2ButtonBuss=36
+
+Relay2LampEngine=3
+Relay2LampSurface=1
+Relay2LampDevice=0x0027
+Relay2LampBuss=36
+
+
+Relay3Engine=3
+Relay3Surface=0
+Relay3Device=0x0002
+Relay3Buss=6
+
+Relay3ButtonEngine=3
+Relay3ButtonSurface=1
+Relay3ButtonDevice=0x0028
+Relay3ButtonBuss=37
+
+Relay3LampEngine=3
+Relay3LampSurface=1
+Relay3LampDevice=0x0027
+Relay3LampBuss=37
+
+
+Relay4Engine=3
+Relay4Surface=0
+Relay4Device=0x0002
+Relay4Buss=7
+
+Relay4ButtonEngine=3
+Relay4ButtonSurface=1
+Relay4ButtonDevice=0x0028
+Relay4ButtonBuss=37
+
+Relay4LampEngine=3
+Relay4LampSurface=1
+Relay4LampDevice=0x0027
+Relay4LampBuss=38
+
+
+Udp1Address1=192.168.10.84
+
+
+[Destination1]
+Name=DST 1
+
+SourceChangedRml=LC blue %dst_name switched to %src_name!
+RelayActivatedRml=LC blue Relay %relay_num activated!
+SilenceSenseOnRml=LC green Audio Restored!
+SilenceSenseOffRml=LC red Audio Failed!
+
+Relay1Output=1
+Relay2Output=2
+Relay3Output=3
+Relay4Output=4
+
+;
+; Target IP address/port for the given UDP forwarder for this
+; destination.
+;
+Udp1Address1=192.168.10.30
+Udp1Port1=5678
+
+;
+; Packet rewrite rule for the given UDP forwarder for this destination.
+; Wildcards take the form of %1, %2, ... %n, where 'n' is the number of
+; the space-delimited field in the original packet.
+;
+Udp1RewriteRule1=DX 1 %2
+
+
+[Destination2]
+Name=DST 2
+
+SourceChangedRml=LC blue %dst_name switched to %src_name!
+RelayActivatedRml=LC blue Relay %relay_num activated!
+SilenceSenseOnRml=LC green Audio Restored!
+SilenceSenseOffRml=LC red Audio Failed!
+
+Relay1Output=5
+Relay2Output=6
+Relay3Output=7
+Relay4Output=8
+
+Udp1Address1=192.168.10.84
+Udp1Port1=5678
+
+
+; UDP Forwarders
+;
+; Create a UDP forwarder that listens on Port and forwards packets to the
+; list of address:port destinations, *if* the packet originates from
+; an active source address as defined in the Udp<n>Address<u>= and
+; Udp<n>Port<u> directives in the [Source<n>] sections.
+;
+[Udp1]
+Port=1234
+
+Udp1Address1=127.0.0.1
+Udp1Port1=1234
+Udp1RewriteRule1=DX 2 %2

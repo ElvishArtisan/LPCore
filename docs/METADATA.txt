@@ -1,0 +1,42 @@
+                         LPCore Metadata Commands
+
+In addition to the standard LP1/LP2 protocol commands, LPCore
+uses metadata commands to control aspects of the connection between
+clients and lpcored(8).  Thes commands are 'private' in that they are
+neither understood nor passed on to the AE engines.
+
+The format is the same as that used for standard LP1/LP2 with the exception
+of the first byte, which is a 0x04 instead of 0x02.
+
+0x01 - SET CONNECTION CONTEXT
+
+ 1    0x04       Metadata Header
+ 2    0x02       Length
+ 3    0x01       Command Byte - Set Connection Context
+ 4    <context>
+
+where <context> can be:
+
+      0x00 - 'Isolated' context: the connection receives updates from
+             engines, but not from changes made by other LP2 clients.
+             This is the default.
+
+      0x01 - 'Global' context: the connection receives updates from
+             changes made by other LP2 clients as well as changes from
+	     engines.
+
+
+0x02 - SEND FULL STATE
+
+ 1    0x04       Metadata Header
+ 2    0x01       Length
+ 3    0x02       Command Byte - Send Full State
+
+
+0x03 - CONNECTION PING
+
+ 1    0x04       Metadata Header
+ 2    0x01       Length
+ 3    0x03       Command Byte - Connection Ping
+
+lpcored(8) will echo back the exact same message.

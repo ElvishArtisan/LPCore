@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Terminal=false
+Categories=Application;AudioVideo;
+Name=Control Room Switcher
+GenericName=Control Room Switcher
+Exec=lppanel
+Icon=logitek
+Type=Application
+Path=/usr/bin
+StartupNotify=false

@@ -1,0 +1,27 @@
+                       LPCore Supported Engine Types
+
+----------------------------------------------------------------------------
+LOGITEK AUDIO ENGINE
+
+Type String: LogitekAudioEngine
+
+GENERAL NOTES:
+Also known as the 'Jetstream Pro' engine.  Interfacing is done by means
+of an RS-232 connection, specified in the 'SerialDevice<n>=' parameter
+in lpcore.conf(5).
+
+
+----------------------------------------------------------------------------
+LPCORE SWITCHER DEVICE
+
+Type String: Switcher
+
+GENERAL NOTES:
+Abstracts an LPCore switcher device as an engine.  At present, only
+GPIO is fully supported, with GPI appearing as device 0x0002 and GPO
+as device 0x0001.  The switcher type is specified with the 'SwitcherId<n>='
+parameter (see 'SWITCHERS.txt' for a list) and the type-specific device
+parameter with the 'SwitcherDevice<n>=' parameter.
+
+
+----------------------------------------------------------------------------

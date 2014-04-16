@@ -1,0 +1,18 @@
+; lpautocue.conf
+;
+; This is the sample configuration file for the LPAutoCue application
+;
+
+[Server]
+Hostname=127.0.0.1
+ProfileName=lpautocue
+Password=letmein
+Port=10212
+
+[Surface1]
+Engine=1
+Surface=1
+SourceBuss=0
+DestinationBuss=2
+AutoOn=Yes
+AutoOff=Yes

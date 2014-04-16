@@ -1,0 +1,28 @@
+; lpautoroute.conf
+;
+; This is the sample configuration file for the LPAutoRoute application
+;
+
+[Server]
+Hostname=127.0.0.1
+ProfileName=lpautoroute
+Password=letmein
+Port=10212
+
+[Switch1]
+Engine=1
+Surface=1
+Device=0x0002
+Buss=0
+
+OnSurface1=0
+OnSourceEngine1=1
+OnSourceDevice1=0x0100
+OnDestinationEngine1=1
+OnDestinationDevice1=0x000B
+
+OffSurface1=0
+OffSourceEngine1=1
+OffSourceDevice1=0x0100
+OffDestinationEngine1=1
+OffDestinationDevice1=0x000B

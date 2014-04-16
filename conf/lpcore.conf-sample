@@ -1,0 +1,53 @@
+; lpcore.conf
+;
+; This is the sample configuration file for the LPCore Router System.
+;
+
+;
+; Engine Settings
+; These settings identify each Audio Engine present in the system.
+;
+
+[Engines]
+;
+; The Engine Number
+;
+Number1=1
+
+;
+; Engine Type
+;
+; Possible types are:
+;   LogitekAudioEngine - Logitek Audio Engine (default)
+;             Switcher - LPCore Switcher Device
+;
+Type1=LogitekAudioEngine
+
+;
+; The device connected to the engine.
+;
+SerialDevice1=/dev/ttyS0
+
+;
+; SwitcherId
+;
+; The ID of switcher device used by the 'Switcher' type.
+; See 'SWITCHERS.txt' for a list.
+SwitcherId1=0
+
+
+[Applications]
+;
+; Name of the program bnary.
+;
+;Command1=lpvguest
+
+;
+; Arguments to pass.
+;
+Arguments1=
+
+;
+; Attempt to restart if the application exits
+;
+Respawn1=Yes

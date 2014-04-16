@@ -1,0 +1,32 @@
+; lpgreenroom.conf
+;
+; This is the sample configuration file for the LPGreenRoom LP application
+;
+
+[Server]
+Hostname=127.0.0.1
+ProfileName=lpgreenroom
+Password=letmein
+Port=10212
+
+[Room1]
+Engine=1
+Surface=1
+ProgramBuss=1
+GreenroomBuss=5
+
+;
+; Source Devices
+;
+Device1=0x0100
+MixMinus1=1
+
+;
+; Multiple devices can be configured...
+;
+;Device2=0x0101
+;MixMinus2=2
+
+;Device3=0x0102
+;MixMinus3=3
+

@@ -1,0 +1,401 @@
+## lpcore.spec.in
+##
+##    The LPCore Console Control System
+##    Copyright (C) 2013  Fred Gleason <fredg@paravelsystems.com>
+##
+##      $Id: lpcore.spec.in,v 1.18 2013/12/31 19:31:04 cvs Exp $
+##
+##    This program is free software; you can redistribute it and/or modify
+##    it under the terms of version 2 of the GNU General Public License as
+##    published by the Free Software Foundation;
+##
+##    This program is distributed in the hope that it will be useful,
+##    but WITHOUT ANY WARRANTY; without even the implied warranty of
+##    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##    GNU General Public License for more details.
+##
+##    You should have received a copy of the GNU General Public License
+##    along with this program; if not, write to the Free Software
+##    Foundation, Inc., 59 Temple Place, Suite 330, 
+##    Boston, MA  02111-1307  USA
+##
+
+Summary: LPCore Console Control System
+Name: lpcore
+Version: @VERSION@
+Release: @RPM_RELEASE@%{?dist}
+License: GPL
+Packager: Fred Gleason <fredg@paravelsystems.com>
+Group: Productivity/Multimedia/Other
+Source: %{name}-@VERSION@.tar.gz
+BuildRequires: qt-devel
+BuildRoot: /var/tmp/%{name}-@VERSION@
+
+%package server
+Summary: Server daemon for LPCore Console Control System.
+Group: Productivity/Multimedia/Other
+Requires: lpcore
+
+%package gui
+Summary: GUI tools for LPCore Console Control System.
+Group: Productivity/Multimedia/Other
+Requires: lpcore
+
+%package devel
+Summary: Development components for the LP Core Console Control System
+Group: Productivity/Multimedia/Other
+Requires: lpcore
+
+%package autocue
+Summary: LPCore AutoCue Application
+Group: Productivity/Multimedia/Other
+Conflicts: lpautocue
+
+%package autoroute
+Summary: LPCore AutoRoute Application
+Group: Productivity/Multimedia/Other
+Conflicts: lpautocue
+
+%package greenroom
+Summary: LPCore Greenroom Application
+Group: Productivity/Multimedia/Other
+Conflicts: lpgreenroom
+
+%package miccontrol
+Summary: LPCore Talkback and Remote Control for Microphones
+Group: Productivity/Multimedia/Other
+Conflicts: lpmiccontrol
+
+%package netrouter
+Summary: Network Facility Router for the LPCore Console Management System
+Group: Productivity/Multimedia/Other
+Conflicts: lpnetrouter
+
+%package netrouter-panel
+Summary: Panel control applet for LpNetRouter
+Group: Productivity/Multimedia/Other
+Conflicts: lpnetrouter-panel
+
+%package remotebutton
+Summary: LPCore Button Processing Application
+Group: Productivity/Multimedia/Other
+Conflicts: lpremotebutton
+
+%description
+LPCore is a system for controling a Logitek Audio Engine system.  It allows
+full control via Logitek's LP2 protocol.
+
+%description server
+This is the server daemon for the LPCore Console Control System.  It
+is used to provide communications to one or more audio engine frames.
+
+%description gui
+These are the GUI tools for the LPCore Console Control System.  Included
+is the lpcore(1) monitor utility.
+
+%description devel
+These are the library components and headers required to develop application
+for the LPCore Console Control System.
+
+%description autocue
+LpAutoCue is an LPCore application that can be used to automatically slave
+the state of one mixing buss to that of another.
+
+%description autoroute
+LpAutoRoute is an LPCore application that can be used to make a set of route
+changes in response to a state change on a buss.
+
+%description greenroom
+LPGreenRoom is an LPCore application that provides a virtual 'greenroom'
+--i.e. a place where hosts can chat 'offline'.
+
+%description miccontrol
+LPMicControl is an LPCore application that provides microphone talkback
+and remote control capabilities.
+
+%description netrouter
+LPNetRouter is an LPCore application that provides a full network facility
+routing system, with the capability to control routing of audio, relay and
+UDP data flows.
+
+%description netrouter-panel
+LPPanel is a GUI applet that allows control of the system routing features
+of LPNetRouter.
+
+%description remotebutton
+LPRemoteButton is an LPCore application that provides the ability
+to process button events.
+
+
+%prep
+
+
+%setup
+
+
+%build
+./configure --prefix=/usr --libdir=%{_libdir}
+make
+
+
+%install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+
+%post
+ldconfig
+
+%post server
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpcore.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpcore.conf-sample /etc/lp/lpcore.conf
+fi
+/etc/init.d/lpcored restart
+if test "@DISTRO@" = "suse" ; then
+  insserv -d -f /etc/init.d/lpcored
+fi
+if test "@DISTRO@" = "redhat" ; then
+  chkconfig --add lpcored
+  chkconfig --levels 235 lpcored on
+fi
+exit 0
+
+%post autocue
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpautocue.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpautocue.conf-sample /etc/lp/lpautocue.conf
+fi
+exit 0
+
+%post autoroute
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpautoroute.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpautoroute.conf-sample /etc/lp/lpautoroute.conf
+fi
+exit 0
+
+
+%post greenroom
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpgreenroom.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpgreenroom.conf-sample /etc/lp/lpgreenroom.conf
+fi
+exit 0
+
+%post miccontrol
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpmiccontrol.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpmiccontrol.conf-sample /etc/lp/lpmiccontrol.conf
+fi
+exit 0
+
+%post netrouter
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpnetrouter.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpnetrouter.conf-sample /etc/lp/lpnetrouter.conf
+fi
+exit 0
+
+%post netrouter-panel
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpnetrouter.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpnetrouter.conf-sample /etc/lp/lpnetrouter.conf
+fi
+exit 0
+
+%post remotebutton
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpremotebutton.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpremotebutton.conf-sample /etc/lp/lpremotebutton.conf
+fi
+
+
+%preun server
+if test "$1" = "0" ; then
+  /etc/init.d/lpcored stop
+  if test "@DISTRO@" = "suse" ; then
+    insserv -r -d -f /etc/init.d/lpcored
+  fi
+  if test "@DISTRO@" = "redhat" ; then
+    chkconfig --levels 2345 lpcored off
+    chkconfig --del lpcored
+  fi
+fi
+exit 0
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%{_libdir}/liblpcore.so.@INTERFACE_MAJOR@.@INTERFACE_MINOR@.@INTERFACE_POINT@
+%{_libdir}/liblpcore.so
+%{_libdir}/liblpcore.so.@INTERFACE_MAJOR@
+/usr/share/icons/hicolor/16x16/apps/logitek.png
+/usr/share/icons/hicolor/22x22/apps/logitek.png
+/usr/share/icons/hicolor/32x32/apps/logitek.png
+/usr/share/icons/hicolor/48x48/apps/logitek.png
+%doc AUTHORS
+%doc ChangeLog
+%doc COPYING 
+%doc INSTALL
+%doc NEWS 
+%doc README 
+%doc conf/lpcore.conf-sample
+%doc docs/BUSSES.txt
+%doc docs/ENGINES.txt
+%doc docs/METADATA.txt
+%doc docs/SWITCHERS.txt
+%doc docs/TEXT.txt
+
+%files server
+/usr/sbin/lpcored
+/etc/init.d/lpcored
+
+%files gui
+/usr/bin/lpcore
+/usr/bin/lpswitch
+
+%files devel
+/usr/include/lpcore/lpcmdswitch.h
+/usr/include/lpcore/lpconfig.h
+/usr/include/lpcore/lpconnection.h
+/usr/include/lpcore/lpengine.h
+/usr/include/lpcore/lpmessage.h
+/usr/include/lpcore/lpparser.h
+/usr/include/lpcore/lpprofile.h
+/usr/include/lpcore/lpswitcher.h
+/usr/include/lpcore/lpswitcherfactory.h
+/usr/include/lpcore/lpttydevice.h
+%{_libdir}/liblpcore.a
+%{_libdir}/liblpcore.la
+%{_libdir}/pkgconfig/lpcore.pc
+
+%files autocue
+%defattr(-,root,root)
+/usr/bin/lpautocue
+%doc conf/lpautocue.conf-sample
+
+%files autoroute
+%defattr(-,root,root)
+/usr/bin/lpautoroute
+%doc conf/lpautoroute.conf-sample
+
+%files greenroom
+%defattr(-,root,root)
+/usr/bin/lpgreenroom
+%doc conf/lpgreenroom.conf-sample
+
+%files miccontrol
+%defattr(-,root,root)
+/usr/bin/lpmiccontrol
+%doc conf/lpmiccontrol.conf-sample
+
+%files netrouter
+%defattr(-,root,root)
+/usr/bin/lpnetrouter
+%doc conf/lpnetrouter.conf-sample
+%doc docs/panel_protocol.odt
+
+%files netrouter-panel
+/usr/bin/lppanel
+/usr/share/applications/lpnetrouter-lppanel.desktop
+%doc conf/lpnetrouter.conf-sample
+
+%files remotebutton
+%defattr(-,root,root)
+/usr/bin/lpremotebutton
+%doc conf/lpremotebutton.conf-sample
+
+
+%changelog
+* Tue Dec 31 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'ENGINES.txt'.
+* Thu Nov 21 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'autocue' sub-package.
+-- Added 'greenroom' sub-package.
+-- Added 'miccontrol' sub-package.
+-- Added 'netrouter' sub-package.
+-- Added 'netrouter-panel' sub-package.
+-- Added 'remotebutton' sub-package.
+* Thu Nov 21 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'TEXT.txt'.
+* Tue Aug 20 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added lpswitch(1).
+* Fri Aug  9 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'lpengine.h'.
+* Wed Aug  7 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'docs/METADATA.txt'.
+* Fri Aug  2 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Moved the icons from the 'gui' to the base package.
+* Tue Jul 30 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'docs/BUSSES.txt'.
+* Thu Jul 25 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'lpmessage.h'.
+* Tue Jul 23 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'docs/SWTICHERS.txt'.
+-- Added 'lpswitcher.h' and 'lpswitcherfactory.h'.
+-- Split post-installation and pre-uninstallation scripts between
+   base and server packages.
+* Sat Jul 20 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Moved lpcore.conf(5) from '/etc/' to /etc/lp/'.
+* Thu Jul 18 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Removed lpvguest(1).
+-- Added 'lpcore.pc'.
+* Tue Jul 16 2013 Fred Gleason <fredg@paravelsystems.com>
+-- Initial packaging.
