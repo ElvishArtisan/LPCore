@@ -1,0 +1,48 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Qt MOC Output
+moc_*.cpp
+
+# Autofoo Cruft
+Makefile
+Makefile.in
+.libs
+.deps
+aclocal.m4
+autom4te.cache
+config.*
+configure
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+
+# Derived Files
+lpcore.pc
+lpcore.spec
+rc.lpcored
+
+# Binaries
+lpautocue/lpautocue
+lpautoroute/lpautoroute
+lpcore/lpcore
+lpcored/lpcored
+lpgreenroom/lpgreenroom
+lpmiccontrol/lpmiccontrol
+lpnetrouter/lpnetrouter
+lpnetrouter/lppanel
+lpremotebutton/lpremotebutton
+lpswitch/lpswitch
