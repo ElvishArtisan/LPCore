@@ -28,6 +28,7 @@ SUBDIRS = conf\
           lib\
           lpautocue\
           lpautoroute\
+          lpcodecpool\
           lpcore\
           lpcored\
           lpgreenroom\

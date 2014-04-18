@@ -35,11 +35,11 @@
 #include <lpcore/lpconnection.h>
 #include <lpcore/lpmessage.h>
 #include <lpcore/lpprofile.h>
+#include <lpcore/lpstreamcmdserver.h>
 #include <lpcore/lpswitcherfactory.h>
 
 #include "destination.h"
 #include "source.h"
-#include "streamcmdserver.h"
 
 #define LPNETROUTER_USAGE "[-d]\n"
 #define LPNETROUTER_CONF_FILE "/etc/lp/lpnetrouter.conf"
@@ -83,7 +83,7 @@ class MainObject : public QObject
   LPSwitcher *lp_main_switcher;
   LPConnection *lp_connection;
   LPProfile *lp_profile;
-  StreamCmdServer *lp_server;
+  LPStreamCmdServer *lp_server;
 };
 
 

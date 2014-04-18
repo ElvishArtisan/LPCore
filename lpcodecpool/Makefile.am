@@ -1,10 +1,8 @@
 ## automake.am
 ##
-## Makefile for the lpnetrouter(1) driver.
+## Makefile for the lpcodecpool(1) application.
 ##
-## (C) Copyright 2013 Fred Gleason <fredg@paravelsystems.com>
-##
-##      $Id: Makefile.am,v 1.7 2013/07/25 23:18:39 cvs Exp $
+## (C) Copyright 2013-2014 Fred Gleason <fredg@paravelsystems.com>
 ##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License version 2 as
@@ -30,24 +28,25 @@ moc_%.cpp:	%.h
 	@MOC@ $< -o $@
 
 
-bin_PROGRAMS = lpnetrouter lppanel
+bin_PROGRAMS = lpcodecpool
+#bin_PROGRAMS = lpcodecpool lppanel
 
-dist_lpnetrouter_SOURCES = destination.cpp destination.h\
-                           lpnetrouter.cpp lpnetrouter.h\
-                           source.cpp source.h
-nodist_lpnetrouter_SOURCES = moc_lpnetrouter.cpp\
-                             moc_source.cpp
+dist_lpcodecpool_SOURCES = codecs.cpp codecs.h\
+                           devices.cpp devices.h\
+                           lpcodecpool.cpp lpcodecpool.h\
+                           rooms.cpp rooms.h
+nodist_lpcodecpool_SOURCES = moc_lpcodecpool.cpp
 
-dist_lppanel_SOURCES = lppanel.cpp lppanel.h\
-                       pushbutton.cpp pushbutton.h
-nodist_lppanel_SOURCES = moc_lppanel.cpp\
-                         moc_pushbutton.cpp
+##dist_lppanel_SOURCES = lppanel.cpp lppanel.h\
+##                       pushbutton.cpp pushbutton.h
+##nodist_lppanel_SOURCES = moc_lppanel.cpp\
+##                         moc_pushbutton.cpp
 
-lpnetrouter_LDADD = @CLI_LPLIBS@
-lpnetrouter_LDFLAGS = @CLI_LPFLAGS@
+lpcodecpool_LDADD = @CLI_LPLIBS@
+lpcodecpool_LDFLAGS = @CLI_LPFLAGS@
 
-lppanel_LDADD = @GUI_LPLIBS@
-lppanel_LDFLAGS = @GUI_LPFLAGS@
+##lppanel_LDADD = @GUI_LPLIBS@
+##lppanel_LDFLAGS = @GUI_LPFLAGS@
 
 CLEANFILES = *~\
              moc_*\

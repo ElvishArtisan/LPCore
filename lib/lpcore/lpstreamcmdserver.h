@@ -1,10 +1,8 @@
-// streamcmdserver.h
+// lpstreamcmdserver.h
 //
 // Parse commands on connection-oriented protocols.
 //
-//   (C) Copyright 2012 Fred Gleason <fredg@paravelsystems.com>
-//
-//      $Id: streamcmdserver.h,v 1.1 2013/11/21 22:31:48 cvs Exp $
+//   (C) Copyright 2012-2014 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -20,8 +18,8 @@
 //   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 
-#ifndef STREAMCMDSERVER_H
-#define STREAMCMDSERVER_H
+#ifndef LPSTREAMCMDSERVER_H
+#define LPSTREAMCMDSERVER_H
 
 #include <stdint.h>
 
@@ -35,17 +33,18 @@
 #include <QtNetwork/QTcpServer>
 #include <QtNetwork/QTcpSocket>
 
-class StreamCmdServer : public QObject
+class LPStreamCmdServer : public QObject
 {
  Q_OBJECT;
  public:
-  StreamCmdServer(const std::map<int,QString> &cmd_table,
-		  const std::map<int,int> &upper_table,
-		  const std::map<int,int> &lower_table,
-		  QTcpServer *server,QObject *parent);
-  ~StreamCmdServer();
+  LPStreamCmdServer(const std::map<int,QString> &cmd_table,
+		    const std::map<int,int> &upper_table,
+		    const std::map<int,int> &lower_table,
+		    QTcpServer *server,QObject *parent);
+  ~LPStreamCmdServer();
   int source(int id);
   void setSource(int id,int src);
+  void getIdList(std::vector<int> *ids);
 
  public slots:
   void sendCommand(int id,int cmd,const QStringList &args=QStringList());
@@ -76,4 +75,4 @@ class StreamCmdServer : public QObject
 };
 
 
-#endif  // STREAMCMDSERVER_H
+#endif  // LPSTREAMCMDSERVER_H

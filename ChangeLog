@@ -296,3 +296,8 @@
 	* Incremented the package version to 1.4.4.
 2014-04-16 Fred Gleason <fredg@paravelsystems.com>
 	* Updated 'README'.
+2014-04-18 Fred Gleason <fredg@paravelsystems.com>
+	* Added lpcodecpool application in 'lpcodecpool/'.
+	* Moved the 'StreamCmdServer' class in
+	'lpnetrouter/streamcmdserver.[cpp,h]' to 'LPStreamCmdServer' in
+	'lib/lpcore/lpstreamcmdserver.[cpp.h]'.

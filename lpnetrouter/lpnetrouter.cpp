@@ -200,7 +200,7 @@ MainObject::MainObject(QObject *parent)
   lower_limits[MainObject::SX]=2;
 
   lp_server=
-    new StreamCmdServer(cmds,upper_limits,lower_limits,server,this);
+    new LPStreamCmdServer(cmds,upper_limits,lower_limits,server,this);
   connect(lp_server,SIGNAL(commandReceived(int,int,const QStringList &)),
 	  this,SLOT(commandReceivedData(int,int,const QStringList &)));
   connect(lp_server,SIGNAL(newConnection(int,const QHostAddress &,uint16_t)),

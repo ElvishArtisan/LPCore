@@ -24,6 +24,7 @@
 
 EXTRA_DIST = lpautocue.conf-sample\
              lpautoroute.conf-sample\
+             lpcodecpool.conf-sample\
              lpcore.conf-sample\
              lpgreenroom.conf-sample\
              lpmiccontrol.conf-sample\

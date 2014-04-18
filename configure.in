@@ -175,6 +175,7 @@ AC_CONFIG_FILES([ \
     lib/lpcore/Makefile \
     lpautocue/Makefile \
     lpautoroute/Makefile \
+    lpcodecpool/Makefile \
     lpcore/Makefile \
     lpcored/Makefile \
     lpgreenroom/Makefile \

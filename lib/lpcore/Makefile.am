@@ -42,6 +42,7 @@ dist_liblpcore_la_SOURCES = lpcmdswitch.cpp lpcmdswitch.h\
                             lpmessage.cpp lpmessage.h\
                             lpparser.cpp lpparser.h\
                             lpprofile.cpp lpprofile.h\
+                            lpstreamcmdserver.cpp lpstreamcmdserver.h\
                             lpswitcher.cpp lpswitcher.h\
                             lpswitcherfactory.cpp lpswitcherfactory.h\
                             lpttydevice.cpp lpttydevice.h\
@@ -54,6 +55,7 @@ dist_liblpcore_la_SOURCES = lpcmdswitch.cpp lpcmdswitch.h\
 nodist_liblpcore_la_SOURCES = moc_lpconnection.cpp\
                               moc_lpparser.cpp\
                               moc_lpttydevice.cpp\
+                              moc_lpstreamcmdserver.cpp\
                               moc_lpswitcher.cpp\
                               moc_switcher_am16.cpp\
                               moc_switcher_btss82.cpp\

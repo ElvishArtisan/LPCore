@@ -1,0 +1,114 @@
+; lpcodecpool.conf
+;
+; This is the sample configuration file for the LPCodecPool application
+;
+
+; Interface Device Parameters
+;
+[Devices]
+
+; InputSwitcherType=<type>
+;
+; The type of input switcher.  See the documentation with the LPCore package
+; for the list of available switcher types.
+;
+InputSwitcherType=0
+
+; InputSwitcherDevice=<dev>
+;
+; The device name to use to connect to the input switcher.
+;
+InputSwitcherDevice=/dev/ttyS0
+
+; OutputSwitcherType=<type>
+;
+; The type of output switcher.  See the documentation with the LPCore package
+; for the list of available switcher types.
+;
+OutputSwitcherType=0
+
+; OutputDevice=<dev>
+;
+; The device name to use to connect to the output switcher.
+;
+OutputSwitcherDevice=/dev/ttyS0
+
+; GpioType=<type>
+;
+; The type of GPIO device.  See the documentation with the LPCore package for
+; the list of available GPIO types.
+;
+GpioType=0
+
+; GpioDevice=<dev>
+;
+; The device name to use to connect to the gpio device.
+;
+GpioDevice=/dev/ttyS0
+
+
+; Codec Parameters
+;
+[Codec1]
+; Name=<name>
+;
+; The codec name (will appear in the control applet).
+;
+Name=BRIC-1
+
+; SwitcherOutput=<port>
+;
+; The output port number on the input switcher that is connected to
+; the specified codec.
+;
+SwitcherOutput=1
+
+; SwitcherInput=<port>
+;
+; The input port number on the output switcher that is connected to
+; the specified codec.
+;
+SwitcherInput=1
+
+; GpioLine=<line>
+;
+; The input line number on the GPIO device that is connected to the codec's
+; 'in use' output.
+;
+GpioLine=1
+
+
+; Room Parameters
+;
+[Room1]
+
+; Name=<name>
+;
+; The name of the room
+Name=Control Room A
+
+; SourceAddress<n>=<ip-address>
+;
+; List of IP addresses to associate with this source.  LPCodecPanel will use
+; this to determine which room a particular session belongs to.
+;
+SourceAddress1=192.168.10.30
+
+; Port<n>Name=<name>
+;
+; The name of the specified port
+Port1=Codec-1
+
+; Port<n>SwitcherOutput=<port>
+;
+; The output port number on the output switcher that is connected to
+; the specified port input.
+;
+Port1SwitcherOutput=1
+
+; Port<n>SwitcherInput=<port>
+;
+; The input port number on the input switcher that is connected to
+; the specified port output.
+;
+Port1SwitcherInput=1

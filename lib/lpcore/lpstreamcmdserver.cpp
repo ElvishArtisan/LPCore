@@ -1,10 +1,8 @@
-// streamcmdserver.cpp
+// lpstreamcmdserver.cpp
 //
 // Parse commands on connection-oriented protocols.
 //
-//   (C) Copyright 2012 Fred Gleason <fredg@paravelsystems.com>
-//
-//      $Id: streamcmdserver.cpp,v 1.1 2013/11/21 22:31:47 cvs Exp $
+//   (C) Copyright 2012-2014 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -20,12 +18,12 @@
 //   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 
-#include "streamcmdserver.h"
+#include "lpstreamcmdserver.h"
 
-StreamCmdServer::StreamCmdServer(const std::map<int,QString> &cmd_table,
-				 const std::map<int,int> &upper_table,
-				 const std::map<int,int> &lower_table,
-				 QTcpServer *server,QObject *parent)
+LPStreamCmdServer::LPStreamCmdServer(const std::map<int,QString> &cmd_table,
+				     const std::map<int,int> &upper_table,
+				     const std::map<int,int> &lower_table,
+				     QTcpServer *server,QObject *parent)
   : QObject(parent)
 {
   //
@@ -56,7 +54,7 @@ StreamCmdServer::StreamCmdServer(const std::map<int,QString> &cmd_table,
 }
 
 
-StreamCmdServer::~StreamCmdServer()
+LPStreamCmdServer::~LPStreamCmdServer()
 {
   delete cmd_garbage_timer;
   delete cmd_read_mapper;
@@ -64,30 +62,40 @@ StreamCmdServer::~StreamCmdServer()
 }
 
 
-int StreamCmdServer::source(int id)
+int LPStreamCmdServer::source(int id)
 {
   return cmd_sources[id];
 }
 
 
-void StreamCmdServer::setSource(int id,int src)
+void LPStreamCmdServer::setSource(int id,int src)
 {
   cmd_sources[id]=src;
 }
 
 
-void StreamCmdServer::sendCommand(int id,int cmd,const QStringList &args)
+void LPStreamCmdServer::getIdList(std::vector<int> *ids)
+{
+  ids->clear();
+  for(std::map<int,QTcpSocket *>::const_iterator it=cmd_sockets.begin();
+      it!=cmd_sockets.end();it++) {
+    ids->push_back(it->first);
+  }
+}
+
+
+void LPStreamCmdServer::sendCommand(int id,int cmd,const QStringList &args)
 {
   QString str=cmd_cmd_table[cmd];
   for(int i=0;i<args.size();i++) {
     str+=QString(" ")+args[i];
   }
   str+="!";
-  cmd_sockets[id]->write(str.toAscii(),str.length());
+  cmd_sockets[id]->write((const char *)str.toAscii(),str.length());
 }
 
 
-void StreamCmdServer::sendCommand(int cmd,const QStringList &args)
+void LPStreamCmdServer::sendCommand(int cmd,const QStringList &args)
 {
   for(std::map<int,QTcpSocket *>::iterator it=cmd_sockets.begin();
       it!=cmd_sockets.end();it++) {
@@ -102,7 +110,7 @@ void StreamCmdServer::sendCommand(int cmd,const QStringList &args)
 }
 
 
-void StreamCmdServer::closeConnection(int id)
+void LPStreamCmdServer::closeConnection(int id)
 {
   cmd_sockets[id]->deleteLater();
   cmd_sockets[id]=NULL;
@@ -110,7 +118,7 @@ void StreamCmdServer::closeConnection(int id)
 }
 
 
-void StreamCmdServer::newConnectionData()
+void LPStreamCmdServer::newConnectionData()
 {
   QTcpSocket *conn=cmd_server->nextPendingConnection();
   cmd_sockets[conn->socketDescriptor()]=conn;
@@ -123,7 +131,7 @@ void StreamCmdServer::newConnectionData()
 }
 
 
-void StreamCmdServer::readyReadData(int id)
+void LPStreamCmdServer::readyReadData(int id)
 {
   int n=-1;
   char data[1500];
@@ -143,7 +151,7 @@ void StreamCmdServer::readyReadData(int id)
 }
 
 
-void StreamCmdServer::collectGarbageData()
+void LPStreamCmdServer::collectGarbageData()
 {
   std::vector<int> ids;
 
@@ -173,7 +181,7 @@ void StreamCmdServer::collectGarbageData()
 }
 
 
-void StreamCmdServer::ProcessCommand(int id)
+void LPStreamCmdServer::ProcessCommand(int id)
 {
   QStringList cmds=cmd_recv_buffers[id].split(" ");
   for(unsigned i=0;i<cmd_cmd_table.size();i++) {
