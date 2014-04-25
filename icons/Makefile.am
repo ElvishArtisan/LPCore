@@ -23,29 +23,25 @@
 
 install-exec-am:	
 	mkdir -p ${DESTDIR}/usr/share/icons/hicolor/16x16/apps
-	cp logitek-16x16.png ${DESTDIR}/usr/share/icons/hicolor/16x16/apps/logitek.png
+	cp lpcodecpool-16x16.png ${DESTDIR}/usr/share/icons/hicolor/16x16/apps/lpcodecpool.png
 	mkdir -p ${DESTDIR}/usr/share/icons/hicolor/22x22/apps
-	cp logitek-22x22.png ${DESTDIR}/usr/share/icons/hicolor/22x22/apps/logitek.png
+	cp lpcodecpool-22x22.png ${DESTDIR}/usr/share/icons/hicolor/22x22/apps/lpcodecpool.png
 	mkdir -p ${DESTDIR}/usr/share/icons/hicolor/32x32/apps
-	cp logitek-32x32.png ${DESTDIR}/usr/share/icons/hicolor/32x32/apps/logitek.png
+	cp lpcodecpool-32x32.png ${DESTDIR}/usr/share/icons/hicolor/32x32/apps/lpcodecpool.png
 	mkdir -p ${DESTDIR}/usr/share/icons/hicolor/48x48/apps
-	cp logitek-48x48.png ${DESTDIR}/usr/share/icons/hicolor/48x48/apps/logitek.png
+	cp lpcodecpool-48x48.png ${DESTDIR}/usr/share/icons/hicolor/48x48/apps/lpcodecpool.png
 
 uninstall:	
-	rm -f ${DESTDIR}/usr/share/icons/hicolor/16x16/apps/logitek.png
-	rm -f ${DESTDIR}/usr/share/icons/hicolor/22x22/apps/logitek.png
-	rm -f ${DESTDIR}/usr/share/icons/hicolor/32x32/apps/logitek.png
-	rm -f ${DESTDIR}/usr/share/icons/hicolor/48x48/apps/logitek.png
+	rm -f ${DESTDIR}/usr/share/icons/hicolor/16x16/apps/lpcodecpool.png
+	rm -f ${DESTDIR}/usr/share/icons/hicolor/22x22/apps/lpcodecpool.png
+	rm -f ${DESTDIR}/usr/share/icons/hicolor/32x32/apps/lpcodecpool.png
+	rm -f ${DESTDIR}/usr/share/icons/hicolor/48x48/apps/lpcodecpool.png
 
-EXTRA_DIST = logitek-16x16.png\
-             logitek-16x16.xpm\
-             logitek-22x22.png\
-             logitek-22x22.xpm\
-             logitek-32x32.png\
-             logitek-32x32.xpm\
-             logitek-48x48.png\
-             logitek-48x48.xpm\
-             logitek.res
+EXTRA_DIST = lpcodecpool-16x16.png\
+             lpcodecpool-16x16.xpm\
+             lpcodecpool-22x22.png\
+             lpcodecpool-32x32.png\
+             lpcodecpool-48x48.png
 
 CLEANFILES = *~
 MAINTAINERCLEANFILES = *~ Makefile.in configure aclocal.m4

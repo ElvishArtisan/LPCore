@@ -35,11 +35,12 @@
 //
 // Icons
 //
-//#include "../icons/lpanels-22x22.xpm"
+#include "../icons/lpcodecpool-16x16.xpm"
 
 MainWidget::MainWidget(QWidget *parent)
   :QWidget(parent)
 {
+  setWindowFlags(windowFlags()|Qt::WindowStaysOnTopHint);
   QString hostname="localhost";
 
   //
@@ -67,33 +68,11 @@ MainWidget::MainWidget(QWidget *parent)
     }
   }
   delete cmd;
-  /*
-  //
-  // Button Mapper
-  //
-  lp_button_mapper=new QSignalMapper(this);
-  connect(lp_button_mapper,SIGNAL(mapped(int)),
-	  this,SLOT(buttonClickedData(int)));
 
   //
   // Create And Set Icon
   //
-  lp_lpanels_map=new QPixmap(lpanels_22x22_xpm);
-  setIcon(*lp_lpanels_map);
-
-  //
-  // Set Window Parameters
-  //
-  if(lp_config->stayOnTop()) {
-    setWFlags(Qt::WStyle_StaysOnTop);
-  }
-
-  //
-  // Create Fonts
-  //
-  QFont button_font=QFont("helvetica",12,QFont::Bold);
-  button_font.setPixelSize(12);
-  */
+  setWindowIcon(QPixmap(lpcodecpool_16x16_xpm));
 
   //
   // Connect To Server
@@ -152,7 +131,6 @@ void MainWidget::readyReadData()
 
 void MainWidget::codecChangedData(unsigned port_num,unsigned codec_num)
 {
-  //  printf("codecChangedData(%u,%u)\n",port_num+1,codec_num);
   SendToServer(QString().sprintf("SX %u %u",codec_num,port_num+1));
 }
 
@@ -272,15 +250,8 @@ int main(int argc,char *argv[])
   //
   // Start Event Loop
   //
-  /*
-  LPConfig *config=LoadConfig(qApp->argc(),qApp->argv());
-  if(config->stayOnTop()) {
-    flags=Qt::WStyle_StaysOnTop;
-  }
-  MainWidget *w=new MainWidget(config,NULL,"main",flags);
-  */
   MainWidget *w=new MainWidget();
-  //a.setMainWidget(w);
+
   w->setGeometry(w->geometry().x(),w->geometry().y(),
 		 w->sizeHint().width(),w->sizeHint().height());
   w->show();

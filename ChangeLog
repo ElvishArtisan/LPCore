@@ -311,3 +311,7 @@
 	* Added a '--disable-mc-gpio' switch to 'configure' in 'configure.ac'.
 2014-04-25 Fred Gleason <fredg@paravelsystems.com>
 	* Added lpcodecpool(1) codec pool control widget in 'lpcodecpool/'.
+2014-04-25 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'lpcodecpool' icon set in 'icons/'.
+	* Modified lpcodecpanel(1) to stay on top in
+	'lpcodecpool/lpcodecpanel.cpp'.
