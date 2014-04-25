@@ -38,6 +38,12 @@ else
 fi
 
 #
+# Option Switches
+#
+AC_ARG_ENABLE(hpi,[  --disable-mc-gpio       disable MeasurementComputing GPIO device support],
+		      [MC_GPIO_DISABLED=yes],[])
+
+#
 # Basic Compiler Checks
 #
 AC_PROG_CXX
@@ -99,7 +105,13 @@ AC_SUBST(MOC,$MOC_NAME)
 #
 # Check for GPIO dernel driver
 #
-AC_CHECK_HEADER(linux/gpio.h,[],[AC_MSG_ERROR([*** GPIO kernel driver not found, unable to continue ***])])
+AC_CHECK_HEADER(linux/gpio.h,[MC_GPIO_FOUND=yes],[])
+if test $MC_GPIO_FOUND ; then
+  if test -z $MC_GPIO_DISABLED ; then
+    USING_MC_GPIO=yes
+    AC_DEFINE(HAVE_MC_GPIO,yes)
+  fi
+fi
 
 #
 # Determine the target architecture
@@ -191,6 +203,20 @@ AC_CONFIG_FILES([ \
 AC_OUTPUT()
 chmod 755 rc.lpcored
 
+#
+# Configuration Results
+#
+AC_MSG_NOTICE()
+AC_MSG_NOTICE("|-----------------------------------------------------|")
+AC_MSG_NOTICE("|         *** LPCORE CONFIGURATION SUMMARY ***        |")
+AC_MSG_NOTICE("|-----------------------------------------------------|")
+AC_MSG_NOTICE("| Hardware Support:                                   |")
+if test -z $USING_MC_GPIO ; then
+AC_MSG_NOTICE("|         MeasurementComputing GPIO Devices ... No    |")
+else
+AC_MSG_NOTICE("|         MeasurementComputing GPIO Devices ... Yes   |")
+fi
+AC_MSG_NOTICE("|-----------------------------------------------------|")
 AC_MSG_NOTICE()
 AC_MSG_NOTICE(Now enter 'make' to build the software.)
 AC_MSG_NOTICE()

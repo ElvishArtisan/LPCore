@@ -305,3 +305,7 @@
 	* Added notes on Debian/Ubuntu in 'INSTALL'.
 2014-04-25 Fred Gleason <fredg@paravelsystems.com>
 	* Added a 'DISTCLEAN' rule in 'lib/Makefile.am'.
+2014-04-25 Fred Gleason <fredg@paravelsystems.com>
+	* Renamed 'configure.in' to 'configure.ac'.
+2014-04-25 Fred Gleason <fredg@paravelsystems.com>
+	* Added a '--disable-mc-gpio' switch to 'configure' in 'configure.ac'.

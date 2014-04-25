@@ -43,7 +43,9 @@ LPSwitcher *LPSwitcherFactory(int id,LPSwitcher::Type type,QObject *parent)
     break;
 
   case LPSwitcher::TypeGpio:
+#ifdef HAVE_MC_GPIO
     ret=new Gpio(id,parent);
+#endif  // HAVE_MC_GPIO
     break;
 
   case LPSwitcher::TypeZephyrClassic:

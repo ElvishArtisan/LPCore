@@ -28,13 +28,16 @@
 #include <syslog.h>
 #include <errno.h>
 
+#ifdef HAVE_MC_GPIO
 #include <linux/gpio.h>
+#endif  // HAVE_MC_GPIO
 
 #include "switcher_gpio.h"
 
 Gpio::Gpio(int id,QObject *parent)
   : LPSwitcher(id,LPSwitcher::TypeGpio,parent)
 {
+#ifdef HAVE_MC_GPIO
   gpio_fd=-1;
   gpio_gpis=0;
   gpio_gpos=0;
@@ -44,11 +47,13 @@ Gpio::Gpio(int id,QObject *parent)
 
   gpio_poll_timer=new QTimer(this);
   connect(gpio_poll_timer,SIGNAL(timeout()),this,SLOT(pollData()));
+#endif  // HAVE_MC_GPIO
 }
 
 
 Gpio::~Gpio()
 {
+#ifdef HAVE_MC_GPIO
   if(gpio_fd>=0) {
     close(gpio_fd);
   }
@@ -57,11 +62,13 @@ Gpio::~Gpio()
   }
   delete gpio_poll_timer;
   delete gpio_gpo_mapper;
+#endif  // HAVE_MC_GPIO
 }
 
 
 bool Gpio::open(const QString &device)
 {
+#ifdef HAVE_MC_GPIO
   if((gpio_fd=::open(device.toAscii(),O_RDONLY|O_NONBLOCK))<0) {
     syslog(LOG_WARNING,"unable to open GPIO device at \"%s\" [%s]",
 	   (const char *)device.toAscii(),strerror(errno));
@@ -90,6 +97,9 @@ bool Gpio::open(const QString &device)
   gpio_poll_timer->start(GPIO_POLL_INTERVAL);
 
   return true;
+#else
+  return false;
+#endif  // HAVE_MC_GPIO
 }
 
 
@@ -101,42 +111,67 @@ void Gpio::connectToHost(const QString &hostname,const QString &password,
 
 int Gpio::inputs()
 {
+#ifdef HAVE_MC_GPIO
   return GPIO_INPUTS;
+#else
+  return 0;
+#endif  // HAVE_MC_GPIO
 }
 
 
 int Gpio::outputs()
 {
+#ifdef HAVE_MC_GPIO
   return GPIO_OUTPUTS;
+#else
+  return 0;
+#endif  // HAVE_MC_GPIO
 }
 
 
 int Gpio::gpis()
 {
+#ifdef HAVE_MC_GPIO
   return gpio_gpis;
+#else
+  return 0;
+#endif  // HAVE_MC_GPIO
 }
 
 
 int Gpio::gpos()
 {
+#ifdef HAVE_MC_GPIO
   return gpio_gpos;
+#else
+  return 0;
+#endif  // HAVE_MC_GPIO
 }
 
 
 int Gpio::lines()
 {
+#ifdef HAVE_MC_GPIO
   return GPIO_LINES;
+#else
+  return 0;
+#endif  // HAVE_MC_GPIO
 }
 
 
 bool Gpio::gpiState(int gpi)
 {
+#ifdef HAVE_MC_GPIO
   return gpio_gpi_states[gpi];
+#else
+  return false;
+#endif  // HAVE_MC_GPIO
 }
 
 
 void Gpio::pulseGpo(int gpo)
 {
+#ifdef HAVE_MC_GPIO
   struct gpio_line line;
 
   if(gpio_gpo_timers[gpo]->isActive()) {
@@ -149,11 +184,13 @@ void Gpio::pulseGpo(int gpo)
 	   strerror(errno));
   }
   gpio_gpo_timers[gpo]->start(GPIO_PULSE_INTERVAL);
+#endif  // HAVE_MC_GPIO
 }
 
 
 void Gpio::gpoData(int gpo)
 {
+#ifdef HAVE_MC_GPIO
   struct gpio_line line;
 
   line.line=gpo;
@@ -162,11 +199,13 @@ void Gpio::gpoData(int gpo)
     syslog(LOG_WARNING,"unable to clear GPIO output %d [%s]",gpo+1,
 	   strerror(errno));
   }
+#endif  // HAVE_MC_GPIO
 }
 
 
 void Gpio::pollData()
 {
+#ifdef HAVE_MC_GPIO
   struct gpio_mask mask;
   unsigned gpi=0;
 
@@ -185,11 +224,13 @@ void Gpio::pollData()
       }
     }
   }
+#endif  // HAVE_MC_GPIO
 }
 
 
 bool Gpio::ProbeCard(int fd)
 {
+#ifdef HAVE_MC_GPIO
   struct gpio_info info;
 
   memset(&info,0,sizeof(info));
@@ -202,4 +243,7 @@ bool Gpio::ProbeCard(int fd)
   gpio_name=info.name;
 
   return true;
+#else
+  return false;
+#endif  // HAVE_MC_GPIO
 }
