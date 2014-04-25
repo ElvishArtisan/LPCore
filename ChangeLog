@@ -301,3 +301,5 @@
 	* Moved the 'StreamCmdServer' class in
 	'lpnetrouter/streamcmdserver.[cpp,h]' to 'LPStreamCmdServer' in
 	'lib/lpcore/lpstreamcmdserver.[cpp.h]'.
+2014-04-25 Fred Gleason <fredg@paravelsystems.com>
+	* Added notes on Debian/Ubuntu in 'INSTALL'.

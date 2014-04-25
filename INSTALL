@@ -15,6 +15,9 @@ Some distros may require that the CPPFLAGS and LDFLAGS
 environmental variables be set prior to running 'configure' in order for
 Qt4 to be detected properly.  Some known cases are:
 
+           Debian/Ubuntu: export CPPFLAGS=-I/usr/include/qt4
+       			  export DEBUILD_ARGS=-k<key-id>
+
   CentOS/RedHat 5 (i386): export CPPFLAGS=-I/usr/lib/qt4/include
                 	  export LDFLAGS=-L/usr/lib/qt4/lib
                 	  export PATH=/usr/lib/qt4/bin:$PATH
