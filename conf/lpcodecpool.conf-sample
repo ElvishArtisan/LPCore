@@ -3,6 +3,14 @@
 ; This is the sample configuration file for the LPCodecPool application
 ;
 
+; LPCore Server Connection
+;
+[Server]
+Hostname=127.0.0.1
+ProfileName=lpnetrouter
+Password=letmein
+Port=10212
+
 ; Interface Device Parameters
 ;
 [Devices]

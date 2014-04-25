@@ -28,8 +28,7 @@ moc_%.cpp:	%.h
 	@MOC@ $< -o $@
 
 
-bin_PROGRAMS = lpcodecpool
-#bin_PROGRAMS = lpcodecpool lppanel
+bin_PROGRAMS = lpcodecpool lpcodecpanel
 
 dist_lpcodecpool_SOURCES = codecs.cpp codecs.h\
                            devices.cpp devices.h\
@@ -37,16 +36,16 @@ dist_lpcodecpool_SOURCES = codecs.cpp codecs.h\
                            rooms.cpp rooms.h
 nodist_lpcodecpool_SOURCES = moc_lpcodecpool.cpp
 
-##dist_lppanel_SOURCES = lppanel.cpp lppanel.h\
-##                       pushbutton.cpp pushbutton.h
-##nodist_lppanel_SOURCES = moc_lppanel.cpp\
-##                         moc_pushbutton.cpp
+dist_lpcodecpanel_SOURCES = codecwidget.cpp codecwidget.h\
+                            lpcodecpanel.cpp lpcodecpanel.h
+nodist_lpcodecpanel_SOURCES = moc_codecwidget.cpp\
+                              moc_lpcodecpanel.cpp
 
 lpcodecpool_LDADD = @CLI_LPLIBS@
 lpcodecpool_LDFLAGS = @CLI_LPFLAGS@
 
-##lppanel_LDADD = @GUI_LPLIBS@
-##lppanel_LDFLAGS = @GUI_LPFLAGS@
+lpcodecpanel_LDADD = @GUI_LPLIBS@
+lpcodecpanel_LDFLAGS = @GUI_LPFLAGS@
 
 CLEANFILES = *~\
              moc_*\

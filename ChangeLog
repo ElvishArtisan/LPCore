@@ -309,3 +309,5 @@
 	* Renamed 'configure.in' to 'configure.ac'.
 2014-04-25 Fred Gleason <fredg@paravelsystems.com>
 	* Added a '--disable-mc-gpio' switch to 'configure' in 'configure.ac'.
+2014-04-25 Fred Gleason <fredg@paravelsystems.com>
+	* Added lpcodecpool(1) codec pool control widget in 'lpcodecpool/'.
