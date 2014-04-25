@@ -31,3 +31,5 @@ CLEANFILES = *~\
              *.tar.gz\
              *.tgz\
              *.zip
+
+DISTCLEANFILES = Makefile.in
