@@ -2,9 +2,7 @@
 ##
 ## xdg/automake.am
 ##
-##   (C) Copyright 2013 Fred Gleason <fredg@paravelsystems.com>
-##
-##      $Id: Makefile.am,v 1.1 2013/11/21 22:31:48 cvs Exp $
+##   (C) Copyright 2013-2014 Fred Gleason <fredg@paravelsystems.com>
 ##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License version 2 as
@@ -24,11 +22,13 @@
 install-exec-am:	
 	mkdir -p ${DESTDIR}@prefix@/share/applications
 	cp lpnetrouter-lppanel.desktop ${DESTDIR}@prefix@/share/applications/
+	cp lpcodecpool-lpcodecpanel.desktop ${DESTDIR}@prefix@/share/applications/
 
 uninstall:	
-	rm -f ${DESTDIR}@prefix@/share/applications/lpnetrouter-lppanel.desktop
+	rm -f ${DESTDIR}@prefix@/share/applications/lpcodecpool-lpcodecpanel.desktop
 
-EXTRA_DIST = lpnetrouter-lppanel.desktop
+EXTRA_DIST = lpcodecpool-lpcodecpanel.desktop\
+             lpnetrouter-lppanel.desktop
 
 CLEANFILES = *~
 

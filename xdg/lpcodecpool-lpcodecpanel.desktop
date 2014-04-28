@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Terminal=false
+Categories=Application;AudioVideo;
+Name=Codec Pool Controller
+GenericName=Codec Pool Controller
+Exec=lpcodecpanel
+Icon=lpcodecpool
+Type=Application
+Path=/usr/bin
+StartupNotify=false

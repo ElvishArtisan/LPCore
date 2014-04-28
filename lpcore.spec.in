@@ -56,6 +56,14 @@ Summary: LPCore AutoRoute Application
 Group: Productivity/Multimedia/Other
 Conflicts: lpautocue
 
+%package codecpool
+Summary: Codec Pool Routing and Control System
+Group: Productivity/Multimedia/Other
+
+%package codecpool-panel
+Summary: Panel control applet for LpCodecPool
+Group: Productivity/Multimedia/Other
+
 %package greenroom
 Summary: LPCore Greenroom Application
 Group: Productivity/Multimedia/Other
@@ -104,6 +112,14 @@ the state of one mixing buss to that of another.
 %description autoroute
 LpAutoRoute is an LPCore application that can be used to make a set of route
 changes in response to a state change on a buss.
+
+%description codecpool
+LPCodecPool is an LPCore application that provides the ability to manage
+a 'pool' of audio codecs, sharing them between multiple mixing surfaces.
+
+%description codecpool-panel
+LPCodecPanel is a GUI applet that allows control of the codec pooling
+features of LPCodecPool.
 
 %description greenroom
 LPGreenRoom is an LPCore application that provides a virtual 'greenroom'
@@ -194,6 +210,34 @@ if test ! -e /etc/lp/lpautoroute.conf ; then
 fi
 exit 0
 
+
+%post codecpool
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpcodecpool.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpcodecpool.conf-sample /etc/lp/lpcodecpool.conf
+fi
+exit 0
+
+%post codecpool-panel
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/lp/lpcodecpool.conf ; then
+  mkdir -p /etc/lp
+  cp $PACKAGE_DOC_DIR/lpcodecpool.conf-sample /etc/lp/lpcodecpool.conf
+fi
+exit 0
 
 %post greenroom
 ldconfig
@@ -286,10 +330,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/liblpcore.so.@INTERFACE_MAJOR@.@INTERFACE_MINOR@.@INTERFACE_POINT@
 %{_libdir}/liblpcore.so
 %{_libdir}/liblpcore.so.@INTERFACE_MAJOR@
-/usr/share/icons/hicolor/16x16/apps/logitek.png
-/usr/share/icons/hicolor/22x22/apps/logitek.png
-/usr/share/icons/hicolor/32x32/apps/logitek.png
-/usr/share/icons/hicolor/48x48/apps/logitek.png
 %doc AUTHORS
 %doc ChangeLog
 %doc COPYING 
@@ -304,12 +344,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/TEXT.txt
 
 %files server
-/usr/sbin/lpcored
+%{_sbindir}/lpcored
 /etc/init.d/lpcored
 
 %files gui
-/usr/bin/lpcore
-/usr/bin/lpswitch
+%{_bindir}/lpcore
+%{_bindir}/lpswitch
 
 %files devel
 /usr/include/lpcore/lpcmdswitch.h
@@ -328,42 +368,60 @@ rm -rf $RPM_BUILD_ROOT
 
 %files autocue
 %defattr(-,root,root)
-/usr/bin/lpautocue
+%{_bindir}/lpautocue
 %doc conf/lpautocue.conf-sample
 
 %files autoroute
 %defattr(-,root,root)
-/usr/bin/lpautoroute
+%{_bindir}/lpautoroute
 %doc conf/lpautoroute.conf-sample
+
+%files codecpool
+%defattr(-,root,root)
+%{_sbindir}/lpcodecpool
+/etc/init.d/lpcodecpool
+%doc conf/lpcodecpool.conf-sample
+%doc docs/pool_protocol.odt
+
+%files codecpool-panel
+%{_bindir}/lpcodecpanel
+%{_datadir}/applications/lpcodecpool-lpcodecpanel.desktop
+%{_datadir}/icons/hicolor/16x16/apps/lpcodecpool.png
+%{_datadir}/icons/hicolor/22x22/apps/lpcodecpool.png
+%{_datadir}/icons/hicolor/32x32/apps/lpcodecpool.png
+%{_datadir}/icons/hicolor/48x48/apps/lpcodecpool.png
+%doc conf/lpcodecpool.conf-sample
 
 %files greenroom
 %defattr(-,root,root)
-/usr/bin/lpgreenroom
+%{_bindir}/lpgreenroom
 %doc conf/lpgreenroom.conf-sample
 
 %files miccontrol
 %defattr(-,root,root)
-/usr/bin/lpmiccontrol
+%{_bindir}/lpmiccontrol
 %doc conf/lpmiccontrol.conf-sample
 
 %files netrouter
 %defattr(-,root,root)
-/usr/bin/lpnetrouter
+%{_bindir}/lpnetrouter
 %doc conf/lpnetrouter.conf-sample
 %doc docs/panel_protocol.odt
 
 %files netrouter-panel
-/usr/bin/lppanel
-/usr/share/applications/lpnetrouter-lppanel.desktop
+%{_bindir}/lppanel
+%{_datadir}/applications/lpnetrouter-lppanel.desktop
 %doc conf/lpnetrouter.conf-sample
 
 %files remotebutton
 %defattr(-,root,root)
-/usr/bin/lpremotebutton
+%{_bindir}/lpremotebutton
 %doc conf/lpremotebutton.conf-sample
 
 
 %changelog
+* Mon Apr 28 2014 Fred Gleason <fredg@paravelsystems.com>
+-- Added 'codecpool' and 'codecpool-panel' sub-packages.
 * Tue Dec 31 2013 Fred Gleason <fredg@paravelsystems.com>
 -- Added 'ENGINES.txt'.
 * Thu Nov 21 2013 Fred Gleason <fredg@paravelsystems.com>

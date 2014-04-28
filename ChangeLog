@@ -319,3 +319,6 @@
 	* Added an init script for lpcodecpool(8) in 'rc.lpcodecpool.in'.
 	* Implemented a PID file for lpcodecpool(8) in
 	'lpcodecpool/lpcodecpool.cpp'.
+2014-04-28 Fred Gleason <fredg@paravelsystems.com>
+	* Added 'codecpool' and 'codecpool-panel' sub-packages to the
+	'make rpm' target.

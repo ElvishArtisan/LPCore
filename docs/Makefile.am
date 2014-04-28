@@ -25,6 +25,7 @@ EXTRA_DIST = BUSSES.txt\
              ENGINES.txt\
              METADATA.txt\
              panel_protocol.odt\
+             pool_protocol.odt\
              SWITCHERS.txt\
              TEXT.txt
 
