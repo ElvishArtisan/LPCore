@@ -328,3 +328,6 @@
 2014-04-28 Fred Gleason <fredg@paravelsystems.com>
 	* Fixed a bug in 'lpcodecpool/lpcodecpool.cpp' that caused
 	a segfault upon startup.
+2014-04-28 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in 'lpcodecpool/lpcodecpanel.cpp' that caused
+	an incorrect number of codec widgets to be displayed.

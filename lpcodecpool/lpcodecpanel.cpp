@@ -184,7 +184,7 @@ void MainWidget::ProcessMessage(const QStringList &msg)
 	//
 	// Create Codec Widgets
 	//
-	codecs=msg[2].toUInt(&ok);
+	codecs=msg[3].toUInt(&ok);
 	if(ok&&(codecs>0)) {
 	  for(unsigned i=0;i<msg[2].toUInt();i++) {
 	    lp_codec_widgets.push_back(new CodecWidget(i,this));
