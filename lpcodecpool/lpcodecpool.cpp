@@ -200,8 +200,8 @@ void MainObject::outputCrosspointChangedData(int id,int output,int input)
   if((codec_num<0)&&(room_num<0)&&(port_num<0)) {
     return;   // Crosspoint unused, ignore
   }
-  if((codec_num<0)&&((room_num<0)||(port_num<0))) {
-    syslog(LOG_WARNING,"invalid output crosspoint change received: output: %d  input: %d  codec: %d  room: %d  port: %d",
+  if((codec_num<0)||(room_num<0)||(port_num<0)) {
+    syslog(LOG_WARNING,"unrecognized output crosspoint change received: output: %d  input: %d  codec: %d  room: %d  port: %d",
 	   output,input,codec_num,room_num,port_num);
     return;
   }
