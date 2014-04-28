@@ -28,7 +28,8 @@ moc_%.cpp:	%.h
 	@MOC@ $< -o $@
 
 
-bin_PROGRAMS = lpcodecpool lpcodecpanel
+bin_PROGRAMS = lpcodecpanel
+sbin_PROGRAMS = lpcodecpool
 
 dist_lpcodecpool_SOURCES = codecs.cpp codecs.h\
                            devices.cpp devices.h\

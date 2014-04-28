@@ -42,6 +42,7 @@
 
 #define LPCODECPOOL_USAGE "[-d]\n"
 #define LPCODECPOOL_CONF_FILE "/etc/lp/lpcodecpool.conf"
+#define LPCODECPOOL_PID_FILE "/var/run/lpcodecpool.pid"
 #define LPCODECPOOL_PANEL_TCP_PORT 50935
 
 class MainObject : public QObject

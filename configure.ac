@@ -197,10 +197,12 @@ AC_CONFIG_FILES([ \
     lpswitch/Makefile \
     lpcore.pc \
     lpcore.spec \
+    rc.lpcodecpool \
     rc.lpcored \
     xdg/Makefile \
     Makefile ])
 AC_OUTPUT()
+chmod 755 rc.lpcodecpool
 chmod 755 rc.lpcored
 
 #

@@ -315,3 +315,7 @@
 	* Added an 'lpcodecpool' icon set in 'icons/'.
 	* Modified lpcodecpanel(1) to stay on top in
 	'lpcodecpool/lpcodecpanel.cpp'.
+2014-04-28 Fred Gleason <fredg@paravelsystems.com>
+	* Added an init script for lpcodecpool(8) in 'rc.lpcodecpool.in'.
+	* Implemented a PID file for lpcodecpool(8) in
+	'lpcodecpool/lpcodecpool.cpp'.

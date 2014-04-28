@@ -41,9 +41,11 @@ SUBDIRS = conf\
 install-exec-local:	
 	mkdir -p ${DESTDIR}/etc/init.d
 	cp rc.lpcored ${DESTDIR}/etc/init.d/lpcored
+	cp rc.lpcodecpool ${DESTDIR}/etc/init.d/lpcodecpool
 
 uninstall-local:
 	rm -f ${DESTDIR}/etc/init.d/lpcored
+	rm -f ${DESTDIR}/etc/init.d/lpcodecpool
 
 rpm:	dist
 	cp lpcore-$(VERSION).tar.gz $(RPM_ROOT)/SOURCES/
@@ -62,6 +64,7 @@ EXTRA_DIST = lpcore.spec.in\
              get_target.sh\
              lpcore.pc.in\
              PACKAGE_VERSION\
+             rc.lpcodecpool.in\
              rc.lpcored.in
 
 CLEANFILES = *~\

@@ -19,7 +19,10 @@
 //
 
 #include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include <syslog.h>
+#include <unistd.h>
 
 #include <QtGui/QApplication>
 #include <QtNetwork/QTcpServer>
@@ -35,6 +38,7 @@ void SigHandler(int signum)
   case SIGHUP:
   case SIGINT:
   case SIGTERM:
+    unlink(LPCODECPOOL_PID_FILE);
     exit(0);
   }
 }
@@ -43,6 +47,7 @@ void SigHandler(int signum)
 MainObject::MainObject(QObject *parent)
   : QObject(parent)
 {
+  FILE *f=NULL;
   bool debug=false;
   QString hostname="localhost";
 
@@ -150,6 +155,21 @@ MainObject::MainObject(QObject *parent)
 	  this,SLOT(commandReceivedData(int,int,const QStringList &)));
   connect(lp_server,SIGNAL(newConnection(int,const QHostAddress &,uint16_t)),
 	  this,SLOT(newConnectionData(int,const QHostAddress &,uint16_t)));
+
+  //
+  // Detach
+  //
+  if(!debug) {
+    daemon(0,0);
+  }
+
+  //
+  // Write PID File
+  //
+  if((f=fopen(LPCODECPOOL_PID_FILE,"w"))!=NULL) {
+    fprintf(f,"%u",getpid());
+    fclose(f);
+  }
 
   //
   // Set Signal Handlers
