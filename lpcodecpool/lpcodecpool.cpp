@@ -182,13 +182,13 @@ MainObject::MainObject(QObject *parent)
 
 void MainObject::inputCrosspointChangedData(int id,int output,int input)
 {
-  //  printf("inputCrosspointChangedData(%d,%d,%d)\n",id,output,input);
+  syslog(LOG_DEBUG,"input switcher output %d changed to %d",output,input);
 }
 
 
 void MainObject::outputCrosspointChangedData(int id,int output,int input)
 {
-  //  printf("outputCrosspointChangedData(%d,%d,%d)\n",id,output,input);
+  syslog(LOG_DEBUG,"output switcher output %d changed to %d",output,input);
 
   int codec_num=lp_codecs->codecBySwitcherInput(input);
   int room_num=lp_rooms->roomBySwitcherOutput(output);

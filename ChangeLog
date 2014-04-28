@@ -338,3 +338,6 @@
 	an incorrect number of codec widgets to be displayed.
 2014-04-28 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 1.5.2.
+2014-04-28 Fred Gleason <fredg@paravelsystems.com>
+	* Added debug logging to indicate crosspoint changes in
+	'lpcodecpool/lpcodecpool.cpp'.
