@@ -186,7 +186,7 @@ void MainWidget::ProcessMessage(const QStringList &msg)
 	//
 	codecs=msg[3].toUInt(&ok);
 	if(ok&&(codecs>0)) {
-	  for(unsigned i=0;i<msg[2].toUInt();i++) {
+	  for(unsigned i=0;i<codecs;i++) {
 	    lp_codec_widgets.push_back(new CodecWidget(i,this));
 	    connect(lp_codec_widgets.back(),
 		    SIGNAL(codecChanged(unsigned,unsigned)),
