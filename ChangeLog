@@ -344,3 +344,6 @@
 2014-04-29 Fred Gleason <fredg@paravelsystems.com>
 	* Changed the description string to 'LPCore CodecPool Daemon'
 	in 'rc.lpcodecpool.in'.
+2014-04-29 Fred Gleason <fredg@paravelsystems.com>
+	* Added sanity checks to the 'Am16::setCrosspoint()' method
+	in 'lib/lpcore/switcher_am16.cpp'.

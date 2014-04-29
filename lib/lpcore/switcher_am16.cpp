@@ -134,18 +134,17 @@ int Am16::crosspoint(int output)
 
 void Am16::setCrosspoint(int output,int input)
 {
+  if((output<0)||(output>=AM16_OUTPUTS)||(input<0)||(input>=AM16_INPUTS)) {
+    syslog(LOG_WARNING,"Am16: request to set output %d to input %d ignored",
+	   output,input);
+    return;
+  }
+
   //
   // Save the desired values
   //
   am_pending_inputs.push_back(input);
   am_pending_outputs.push_back(output);
-
-  //
-  // Request the current crosspoint map
-  //
-  if(am_pending_inputs.size()==1) {
-    pollData();
-  }
 }
 
 
@@ -194,9 +193,11 @@ void Am16::readyReadData(int sock)
 
 void Am16::timeoutData()
 {
-  syslog(LOG_WARNING,
+  if(am_pending_inputs.size()>0) {
+    syslog(LOG_WARNING,
 	 "AM16 driver: timed out waiting for crosspoint map, %lu event(s) lost",
 	 am_pending_inputs.size());
+  }
   am_pending_inputs.clear();
   am_pending_outputs.clear();
   am_poll_pending=false;
@@ -242,7 +243,7 @@ void Am16::ProcessMessage(char *msg,int len)
       //
       // Apply Changes
       //
-      for(int i=(int)am_pending_inputs.size()-1;i>=0;i--) {
+      for(unsigned i=0;i<am_pending_inputs.size();i++) {
 	msg[8+am_pending_outputs[i]]=0xFF&(am_pending_inputs[i]+1);
       }
     }

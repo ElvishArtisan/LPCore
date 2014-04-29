@@ -29,8 +29,8 @@ Codecs::Codecs(LPProfile *p)
   QString name=p->stringValue(section,"Name","",&ok);
   while(ok) {
     codec_names.push_back(name);
-    codec_switcher_outputs.push_back(p->intValue(section,"SwitcherOutput"));
-    codec_switcher_inputs.push_back(p->intValue(section,"SwitcherInput"));
+    codec_switcher_outputs.push_back(p->intValue(section,"SwitcherOutput")-1);
+    codec_switcher_inputs.push_back(p->intValue(section,"SwitcherInput")-1);
     codec_gpio_lines.push_back(p->intValue(section,"GpioLine"));
     codec_busy_in_rooms.push_back(-1);
     count++;

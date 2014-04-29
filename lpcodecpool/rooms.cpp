@@ -43,19 +43,19 @@ Rooms::Rooms(LPProfile *p)
     //
     unsigned port=1;
     int output=p->intValue(section,QString().sprintf("Port%uSwitcherOutput",
-						     port),0,&ok);
+						     port),0,&ok)-1;
     while(ok) {
       room_switcher_outputs.back().push_back(output);
       room_switcher_inputs.back().
 	push_back(p->intValue(section,QString().sprintf("Port%uSwitcherInput",
-							port)));
+							port))-1);
       room_port_names.back().
 	push_back(p->stringValue(section,QString().sprintf("Port%uName",port),
 				 QString().sprintf("Codec %u",port)));
       room_codecs.back().push_back(-1);
       port++;
       output=p->intValue(section,QString().sprintf("Port%uSwitcherOutput",
-						   port),0,&ok);
+						   port),0,&ok)-1;
     }
 
     //

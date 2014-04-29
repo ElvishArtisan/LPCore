@@ -182,13 +182,23 @@ MainObject::MainObject(QObject *parent)
 
 void MainObject::inputCrosspointChangedData(int id,int output,int input)
 {
-  syslog(LOG_DEBUG,"input switcher output %d changed to %d",output,input);
+  if(lp_devices->inputSwitcher()!=lp_devices->outputSwitcher()) {
+    syslog(LOG_DEBUG,"input switcher output %d changed to input %d",
+	   output+1,input+1);
+  }
 }
 
 
 void MainObject::outputCrosspointChangedData(int id,int output,int input)
 {
-  syslog(LOG_DEBUG,"output switcher output %d changed to %d",output,input);
+  if(lp_devices->inputSwitcher()==lp_devices->outputSwitcher()) {
+    syslog(LOG_DEBUG,"input/output switcher output %d changed to input %d",
+	   output+1,input+1);
+  }
+  else {
+    syslog(LOG_DEBUG,"output switcher output %d changed to input %d",
+	   output+1,input+1);
+  }
 
   int codec_num=lp_codecs->codecBySwitcherInput(input);
   int room_num=lp_rooms->roomBySwitcherOutput(output);
@@ -201,7 +211,7 @@ void MainObject::outputCrosspointChangedData(int id,int output,int input)
     return;   // Crosspoint unused, ignore
   }
   if((codec_num<0)||(room_num<0)||(port_num<0)) {
-    syslog(LOG_WARNING,"unrecognized output crosspoint change received: output: %d  input: %d  codec: %d  room: %d  port: %d",
+    syslog(LOG_DEBUG,"unrecognized output crosspoint change received: output: %d  input: %d  codec: %d  room: %d  port: %d",
 	   output,input,codec_num,room_num,port_num);
     return;
   }
