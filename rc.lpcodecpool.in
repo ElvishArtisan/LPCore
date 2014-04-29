@@ -52,7 +52,7 @@ fi
 PACKAGE_BIN=@LOCAL_PREFIX@/sbin/lpcodecpool
 PACKAGE_CONFIG=/etc/lp/lpcodecpool.conf
 PACKAGE_PID=/var/run/lpcodecpool.pid
-PACKAGE_NAME="Logitek Core Router Daemon"
+PACKAGE_NAME="LPCore CodecPool Daemon"
 
 # Check for missing binaries
 if [ ! -x $PACKAGE_BIN ] ; then

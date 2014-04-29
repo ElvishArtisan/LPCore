@@ -341,3 +341,6 @@
 2014-04-28 Fred Gleason <fredg@paravelsystems.com>
 	* Added debug logging to indicate crosspoint changes in
 	'lpcodecpool/lpcodecpool.cpp'.
+2014-04-29 Fred Gleason <fredg@paravelsystems.com>
+	* Changed the description string to 'LPCore CodecPool Daemon'
+	in 'rc.lpcodecpool.in'.
