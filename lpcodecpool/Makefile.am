@@ -37,10 +37,12 @@ dist_lpcodecpool_SOURCES = codecs.cpp codecs.h\
                            rooms.cpp rooms.h
 nodist_lpcodecpool_SOURCES = moc_lpcodecpool.cpp
 
-dist_lpcodecpanel_SOURCES = codecwidget.cpp codecwidget.h\
+dist_lpcodecpanel_SOURCES = clicklabel.cpp clicklabel.h\
+                            codecwidget.cpp codecwidget.h\
                             lpcodecpanel.cpp lpcodecpanel.h\
                             statuslight.cpp statuslight.h
-nodist_lpcodecpanel_SOURCES = moc_codecwidget.cpp\
+nodist_lpcodecpanel_SOURCES = moc_clicklabel.cpp\
+                              moc_codecwidget.cpp\
                               moc_lpcodecpanel.cpp\
                               moc_statuslight.cpp
 

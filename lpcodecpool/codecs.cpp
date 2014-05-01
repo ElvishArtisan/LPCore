@@ -32,6 +32,8 @@ Codecs::Codecs(LPProfile *p)
     codec_switcher_outputs.push_back(p->intValue(section,"SwitcherOutput")-1);
     codec_switcher_inputs.push_back(p->intValue(section,"SwitcherInput")-1);
     codec_gpio_lines.push_back(p->intValue(section,"GpioLine")-1);
+    codec_configuration_commands.
+      push_back(p->stringValue(section,"ConfigurationCommand"));
     codec_busys.push_back(false);
     codec_connected_to_rooms.push_back(-1);
     count++;
@@ -68,6 +70,12 @@ int Codecs::switcherInput(unsigned n) const
 int Codecs::gpioLine(unsigned n) const
 {
   return codec_gpio_lines[n];
+}
+
+
+QString Codecs::configurationCommand(unsigned n) const
+{
+  return codec_configuration_commands[n];
 }
 
 

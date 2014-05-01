@@ -274,6 +274,12 @@ void MainObject::commandReceivedData(int id,int cmd,const QStringList &args)
       lp_server->sendCommand(id,(int)MainObject::GC,oargs);
 
       oargs.clear();
+      oargs.push_back("C");
+      oargs.push_back(QString().sprintf("%u",i+1));
+      oargs.push_back(lp_codecs->configurationCommand(i));
+      lp_server->sendCommand(id,(int)MainObject::GC,oargs);
+
+      oargs.clear();
       oargs.push_back("B");
       oargs.push_back(QString().sprintf("%u",i+1));
       oargs.push_back(QString().sprintf("%u",lp_codecs->isBusy(i)));

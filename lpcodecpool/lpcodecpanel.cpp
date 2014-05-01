@@ -158,7 +158,6 @@ void MainWidget::resizeEvent(QResizeEvent *e)
 void MainWidget::ProcessMessage(const QStringList &msg)
 {
   bool ok=false;
-  QString str;
   unsigned port;
   unsigned codecs;
   bool state=false;
@@ -177,10 +176,7 @@ void MainWidget::ProcessMessage(const QStringList &msg)
 	//
 	// Set Title
 	//
-	for(int i=4;i<msg.size();i++) {
-	  str+=msg[i]+" ";
-	}
-	setWindowTitle(str);
+	setWindowTitle(Rejoin(msg,4));
 
 	//
 	// Create Codec Widgets
@@ -208,7 +204,16 @@ void MainWidget::ProcessMessage(const QStringList &msg)
 	codecs=msg[2].toUInt(&ok);
 	if(ok&&(codecs>0)) {
 	  for(unsigned i=0;i<lp_codec_widgets.size();i++) {
-	    lp_codec_widgets[i]->setCodecName(codecs,msg[3]);
+	    lp_codec_widgets[i]->setCodecName(codecs,Rejoin(msg,3));
+	  }
+	}
+      }
+
+      if(msg[1]=="C") {
+	codecs=msg[2].toUInt(&ok);
+	if(ok&&(codecs>0)) {
+	  for(unsigned i=0;i<lp_codec_widgets.size();i++) {
+	    lp_codec_widgets[i]->setConfigurationCommand(codecs,Rejoin(msg,3));
 	  }
 	}
       }
@@ -224,10 +229,7 @@ void MainWidget::ProcessMessage(const QStringList &msg)
       if(msg[1]=="I") {
 	port=msg[2].toUInt(&ok)-1;
 	if(ok&&(port<lp_codec_widgets.size())) {
-	  for(int i=3;i<msg.size();i++) {
-	    str+=msg[i]+" ";
-	  }
-	  lp_codec_widgets[port]->setPortName(str);
+	  lp_codec_widgets[port]->setPortName(Rejoin(msg,3));
 	}
       }
       break;
@@ -242,10 +244,7 @@ void MainWidget::ProcessMessage(const QStringList &msg)
   }
 
   if(msg[0]=="MB") {
-    for(int i=1;i<msg.size();i++) {
-      str+=msg[i]+" ";
-    }
-    QMessageBox::warning(this,"LPCodecPanel - "+tr("Message"),str);
+    QMessageBox::warning(this,"LPCodecPanel - "+tr("Message"),Rejoin(msg,1));
   }
 }
 
@@ -254,6 +253,19 @@ void MainWidget::SendToServer(const QString &msg)
 {
   //printf("SENDING: %s\n",(const char *)msg.toAscii());
   lp_socket->write((msg+"!").toAscii(),msg.length()+1);
+}
+
+
+QString MainWidget::Rejoin(const QStringList &strs,int start_at)
+{
+  QString ret="";
+
+  for(int i=start_at;i<strs.size();i++) {
+    ret+=strs[i]+" ";
+  }
+  ret=ret.left(ret.length()-1);
+
+  return ret;
 }
 
 

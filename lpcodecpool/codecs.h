@@ -23,6 +23,8 @@
 
 #include <vector>
 
+#include <QtCore/QString>
+
 #include <lpcore/lpprofile.h>
 
 class Codecs
@@ -34,6 +36,7 @@ class Codecs
   int switcherOutput(unsigned n) const;
   int switcherInput(unsigned n) const;
   int gpioLine(unsigned n) const;
+  QString configurationCommand(unsigned n) const;
   int codecBySwitcherInput(int input) const;
   int codecBySwitcherOutput(int output) const;
   int codecByGpio(int line) const;
@@ -47,6 +50,7 @@ class Codecs
   std::vector<int> codec_switcher_outputs;
   std::vector<int> codec_switcher_inputs;
   std::vector<int> codec_gpio_lines;
+  std::vector<QString> codec_configuration_commands;
   std::vector<bool> codec_busys;
   std::vector<int> codec_connected_to_rooms;
 };

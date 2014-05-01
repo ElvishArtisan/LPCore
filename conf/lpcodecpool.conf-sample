@@ -85,6 +85,12 @@ SwitcherInput=1
 ;
 GpioLine=1
 
+; ConfigurationCommand=<cmd>
+;
+; The command to use to configure this codec device.
+;
+ConfigurationCommand=firefox http://bric-1.example.com/
+
 
 ; Room Parameters
 ;

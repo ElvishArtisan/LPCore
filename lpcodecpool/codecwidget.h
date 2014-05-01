@@ -19,9 +19,10 @@
 //   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 
-
 #ifndef CODECWIDGET_H
 #define CODECWIDGET_H
+
+#include <map>
 
 #include <QtCore/QTimer>
 #include <QtGui/QComboBox>
@@ -29,6 +30,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
 
+#include "clicklabel.h"
 #include "statuslight.h"
 
 class CodecWidget : public QFrame
@@ -41,6 +43,7 @@ class CodecWidget : public QFrame
   QSizePolicy sizePolicy() const;
   void setPortName(const QString &str);
   void setCodecName(unsigned codec_num,const QString &str);
+  void setConfigurationCommand(unsigned codec_num,const QString &cmd);
   void setCodec(unsigned codec_num);
   void setBusy(unsigned codec_num,bool state);
 
@@ -51,13 +54,15 @@ class CodecWidget : public QFrame
   void takeClickedData();
   void resetData();
   void codecChangedData(int codec);
+  void codecClickedData();
 
  private:
   QLabel *codec_label_label;
-  QLabel *codec_state_label;
+  ClickLabel *codec_state_label;
   StatusLight *codec_status_light;
   QLabel *codec_status_label;
   QComboBox *codec_codec_box;
+  std::map<unsigned,QString> codec_configuration_commands;
   QPushButton *codec_take_button;
   unsigned codec_port_number;
   unsigned codec_codec_number;

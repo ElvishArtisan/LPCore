@@ -19,7 +19,11 @@
 //   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 
+#include <errno.h>
 #include <stdio.h>
+#include <unistd.h>
+
+#include <QtGui/QMessageBox>
 
 #include "codecwidget.h"
 
@@ -46,13 +50,14 @@ CodecWidget::CodecWidget(unsigned port_num,QWidget *parent)
   codec_label_label->setGeometry(5,0,sizeHint().width()-10,
 				 sizeHint().height()/5-10);
 
-  codec_state_label=new QLabel(this);
+  codec_state_label=new ClickLabel(this);
   codec_state_label->setAlignment(Qt::AlignCenter);
   codec_state_label->setGeometry(5,sizeHint().height()/5-5,
 				 sizeHint().width()-10,
 				 sizeHint().height()/5-10);
   codec_state_label->setFrameStyle(QFrame::Box|QFrame::Raised);
   codec_state_label->setLineWidth(2);
+  connect(codec_state_label,SIGNAL(clicked()),this,SLOT(codecClickedData()));
 
   codec_status_light=new StatusLight(this);
   codec_status_light->setGeometry(25,2*sizeHint().height()/5-10,
@@ -120,6 +125,12 @@ void CodecWidget::setCodecName(unsigned codec_num,const QString &str)
 }
 
 
+void CodecWidget::setConfigurationCommand(unsigned codec_num,const QString &cmd)
+{
+  codec_configuration_commands[codec_num]=cmd;
+}
+
+
 void CodecWidget::setCodec(unsigned codec_num)
 {
   codec_codec_box->setCurrentIndex(codec_num);
@@ -129,6 +140,13 @@ void CodecWidget::setCodec(unsigned codec_num)
 
   codec_status_light->setDisabled(codec_num==0);
   codec_status_label->setDisabled(codec_num==0);
+
+  if(codec_configuration_commands[codec_num].isEmpty()) {
+    codec_state_label->setCursor(Qt::ArrowCursor);
+  }
+  else {
+    codec_state_label->setCursor(Qt::PointingHandCursor);
+  }
 }
 
 
@@ -162,4 +180,60 @@ void CodecWidget::codecChangedData(int codec)
     codec_codec_box->setCurrentIndex(codec_codec_number);
   }
   codec_reset_timer->start(15000);
+}
+
+
+void CodecWidget::codecClickedData()
+{
+  if(codec_configuration_commands[codec_codec_number].isEmpty()) {
+    return;
+  }
+  QStringList args=codec_configuration_commands[codec_codec_number].split(" ");
+
+  if(fork()==0) {
+    //
+    // FIXME: This is really brain-dead.  How do we construct an
+    //        array with a variable number of arguments?
+    //
+    switch(args.size()) {
+    case 1:
+      execlp(args[0].toAscii(),(const char *)args[0].toAscii(),
+	     (char *)NULL);
+      break;
+
+    case 2:
+      execlp(args[0].toAscii(),(const char *)args[0].toAscii(),
+	     (const char *)args[1].toAscii(),(char *)NULL);
+      break;
+
+    case 3:
+      execlp(args[0].toAscii(),(const char *)args[0].toAscii(),
+	     (const char *)args[1].toAscii(),
+	     (const char *)args[2].toAscii(),
+	     (char *)NULL);
+      break;
+
+    case 4:
+      execlp(args[0].toAscii(),(const char *)args[0].toAscii(),
+	     (const char *)args[1].toAscii(),
+	     (const char *)args[2].toAscii(),
+	     (const char *)args[3].toAscii(),
+	     (char *)NULL);
+      break;
+
+    case 5:
+      execlp(args[0].toAscii(),(const char *)args[0].toAscii(),
+	     (const char *)args[1].toAscii(),
+	     (const char *)args[2].toAscii(),
+	     (const char *)args[3].toAscii(),
+	     (const char *)args[4].toAscii(),
+	     (char *)NULL);
+      break;
+    }
+    QMessageBox::warning(this,"LPCodecPanel - "+tr("Error"),
+			 tr("Failed to start command")+" \""+
+			 codec_configuration_commands[codec_codec_number]+
+			 "\" ["+strerror(errno)+"].");
+    exit(256);
+  }
 }

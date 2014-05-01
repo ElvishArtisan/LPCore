@@ -59,6 +59,7 @@ class MainWidget : public QWidget
  private:
   void ProcessMessage(const QStringList &msg);
   void SendToServer(const QString &msg);
+  QString Rejoin(const QStringList &strs,int start_at);
   std::vector<CodecWidget *> lp_codec_widgets;
   QTcpSocket *lp_socket;
   QString lp_socket_buffer;

@@ -359,3 +359,8 @@
 	* Implemented a 'Display Message' ['MB'] command in
 	'lpcodecpool/lpcodecpool.cpp' and 'lpcodecpool/lpcodecpanel.cpp'.
 	* Implemented codec locking in 'lpcodecpool/lpcodecpool.cpp'.
+2014-05-01 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'ConfigurationCommand=<cmd>' directive to
+	lpcodecpool.conf(5).
+	* Added a 'ClickLabel' widget in 'lpcodecpool/clicklabel.cpp' and
+	'lpcodecpool.clicklabel.h'.
