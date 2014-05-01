@@ -221,6 +221,10 @@ QString LPSwitcher::typeString(LPSwitcher::Type type)
     ret=tr("Telos Zephyr Xtreme");
     break;
 
+  case LPSwitcher::TypeDummy:
+    ret=tr("Dummy Switcher");
+    break;
+
   case LPSwitcher::TypeLast:
     break;
   }

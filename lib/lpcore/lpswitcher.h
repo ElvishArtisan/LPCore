@@ -35,7 +35,7 @@ class LPSwitcher : public QObject
  Q_OBJECT;
  public:
  enum Type {TypeBtSs82=0,TypeAm16=1,TypeZephyrClassic=2,TypeZephyrXtreme=3,
-	    TypeGpio=4,TypeLast=5};
+	    TypeGpio=4,TypeDummy=5,TypeLast=6};
   enum LineState {StateOffline=0,StateIdle=1,StateProgressing=2,
 		  StateConnected=3,StateDisconnecting=4};
   enum XmtAlgo {XmtG722=0,XmtMpegL2Stereo=1,XmtMpegL2JointStereo=2,

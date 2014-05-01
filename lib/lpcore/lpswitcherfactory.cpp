@@ -25,6 +25,7 @@
 #include "lpswitcherfactory.h"
 #include "switcher_am16.h"
 #include "switcher_btss82.h"
+#include "switcher_dummy.h"
 #include "switcher_gpio.h"
 #include "switcher_zephyrclassic.h"
 #include "switcher_zephyrxtreme.h"
@@ -40,6 +41,10 @@ LPSwitcher *LPSwitcherFactory(int id,LPSwitcher::Type type,QObject *parent)
 
   case LPSwitcher::TypeBtSs82:
     ret=new BtSs82(id,parent);
+    break;
+
+  case LPSwitcher::TypeDummy:
+    ret=new Dummy(id,parent);
     break;
 
   case LPSwitcher::TypeGpio:

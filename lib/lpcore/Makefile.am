@@ -4,8 +4,6 @@
 ##
 ## (C) Copyright 2013 Fred Gleason <fredg@paravelsystems.com>
 ##
-##      $Id: Makefile.am,v 1.9 2013/09/09 16:42:56 cvs Exp $
-##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License version 2 as
 ##   published by the Free Software Foundation.
@@ -48,6 +46,7 @@ dist_liblpcore_la_SOURCES = lpcmdswitch.cpp lpcmdswitch.h\
                             lpttydevice.cpp lpttydevice.h\
                             switcher_am16.cpp switcher_am16.h\
                             switcher_btss82.cpp switcher_btss82.h\
+                            switcher_dummy.cpp switcher_dummy.h\
                             switcher_gpio.cpp switcher_gpio.h\
                             switcher_zephyrclassic.cpp switcher_zephyrclassic.h\
                             switcher_zephyrxtreme.cpp switcher_zephyrxtreme.h
@@ -59,6 +58,7 @@ nodist_liblpcore_la_SOURCES = moc_lpconnection.cpp\
                               moc_lpswitcher.cpp\
                               moc_switcher_am16.cpp\
                               moc_switcher_btss82.cpp\
+                              moc_switcher_dummy.cpp\
                               moc_switcher_gpio.cpp\
                               moc_switcher_zephyrclassic.cpp\
                               moc_switcher_zephyrxtreme.cpp

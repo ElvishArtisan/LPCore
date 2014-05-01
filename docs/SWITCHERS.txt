@@ -4,6 +4,7 @@ The following devices are supported as switchers under LPCore:
 
 360 Systems AM-16/B Audio Crosspoint Switcher
 Broadcast Tools SS 8.2 Dual Stereo Audio Switcher
+Dummy Switcher Device
 Telos Zephyr Classic Digital Network Audio Tranceiver
 Telos Zephyr Xtreme Digital Network Audio Tranceiver
 
@@ -65,6 +66,14 @@ in the Broadcast Tools documentation), then you will also need to be sure
 that DIP switch SW-14-10 is ON, whereas leaving it OFF allows crosspoints
 to be selected by means of closures at these inputs.
 
+
+----------------------------------------------------------------------------
+Dummy Switcher Device
+
+Type ID: 5
+
+GENERAL NOTES:
+Used only for internal testing and debugging of the code.
 
 ----------------------------------------------------------------------------
 GPIO Driver-Driven General Purpose Input/Output Cards
