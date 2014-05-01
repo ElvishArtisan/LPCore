@@ -37,15 +37,18 @@ class Codecs
   int codecBySwitcherInput(int input) const;
   int codecBySwitcherOutput(int output) const;
   int codecByGpio(int line) const;
-  int busyInRoom(unsigned n) const;
-  void setBusyInRoom(unsigned n,int room_num);
+  bool isBusy(unsigned n) const;
+  void setBusy(unsigned n,bool state);
+  int connectedToRoom(unsigned n) const;
+  void setConnectedToRoom(unsigned n,int room_num);
 
  private:
   std::vector<QString> codec_names;
   std::vector<int> codec_switcher_outputs;
   std::vector<int> codec_switcher_inputs;
   std::vector<int> codec_gpio_lines;
-  std::vector<int> codec_busy_in_rooms;
+  std::vector<bool> codec_busys;
+  std::vector<int> codec_connected_to_rooms;
 };
 
 

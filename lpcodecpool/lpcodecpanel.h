@@ -62,21 +62,6 @@ class MainWidget : public QWidget
   std::vector<CodecWidget *> lp_codec_widgets;
   QTcpSocket *lp_socket;
   QString lp_socket_buffer;
-  /*
-  QPixmap *lp_lpanels_map;
-  LPConfig *lp_config;
-  bool lp_first_connection;
-  QSignalMapper *lp_button_mapper;
-  std::vector<PushButton *> lp_buttons;
-  QPalette lp_active_button_palette;
-  int lp_active_source;
-  int lp_armed_source;
-  int lp_initial_armed_source;
-  int lp_inputs;
-  int lp_output_number;
-  int lp_active_input;
-  int lp_armed_input;
-  */
 };
 
 

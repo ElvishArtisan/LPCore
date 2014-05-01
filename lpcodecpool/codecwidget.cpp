@@ -35,6 +35,8 @@ CodecWidget::CodecWidget(unsigned port_num,QWidget *parent)
   //
   // Fonts
   //
+  QFont label_font("helvetica",12,QFont::Bold);
+  label_font.setPixelSize(12);
   QFont button_font("helvetica",16,QFont::Bold);
   button_font.setPixelSize(16);
 
@@ -42,29 +44,41 @@ CodecWidget::CodecWidget(unsigned port_num,QWidget *parent)
   codec_label_label->setFont(button_font);
   codec_label_label->setAlignment(Qt::AlignCenter);
   codec_label_label->setGeometry(5,0,sizeHint().width()-10,
-				 sizeHint().height()/4-10);
+				 sizeHint().height()/5-10);
 
   codec_state_label=new QLabel(this);
   codec_state_label->setAlignment(Qt::AlignCenter);
-  codec_state_label->setGeometry(5,sizeHint().height()/4-10,
+  codec_state_label->setGeometry(5,sizeHint().height()/5-5,
 				 sizeHint().width()-10,
-				 sizeHint().height()/4-10);
+				 sizeHint().height()/5-10);
   codec_state_label->setFrameStyle(QFrame::Box|QFrame::Raised);
   codec_state_label->setLineWidth(2);
 
+  codec_status_light=new StatusLight(this);
+  codec_status_light->setGeometry(25,2*sizeHint().height()/5-10,
+				  codec_status_light->sizeHint().width(),
+				  codec_status_light->sizeHint().height());
+  codec_status_label=new QLabel(tr("Connected"),this);
+  codec_status_label->setFont(label_font);
+  codec_status_label->setAlignment(Qt::AlignLeft|Qt::AlignVCenter);
+  codec_status_label->setGeometry(30+codec_status_light->sizeHint().width(),
+				  2*sizeHint().height()/5-10,
+				  sizeHint().width(),
+				  codec_status_light->sizeHint().height());
+
   codec_codec_box=new QComboBox(this);
-  codec_codec_box->setGeometry(5,sizeHint().height()/2-10,
+  codec_codec_box->setGeometry(5,3*sizeHint().height()/5-10,
 			       sizeHint().width()-10,
-			       sizeHint().height()/4-10);
+			       sizeHint().height()/5-10);
   codec_codec_box->insertItem(0,"-- "+tr("OFF")+" --");
   connect(codec_codec_box,SIGNAL(activated(int)),
 	  this,SLOT(codecChangedData(int)));
 
   codec_take_button=new QPushButton(tr("Take"),this);
   codec_take_button->setFont(button_font);
-  codec_take_button->setGeometry(5,3*sizeHint().height()/4-10,
+  codec_take_button->setGeometry(5,4*sizeHint().height()/5-10,
 				 sizeHint().width()-10,
-				 sizeHint().height()/4);
+				 sizeHint().height()/5);
   connect(codec_take_button,SIGNAL(clicked()),this,SLOT(takeClickedData()));
 
   codec_reset_timer=new QTimer(this);
@@ -112,6 +126,17 @@ void CodecWidget::setCodec(unsigned codec_num)
   codec_state_label->setText(codec_codec_box->currentText());
   codec_codec_number=codec_num;
   codec_reset_timer->stop();
+
+  codec_status_light->setDisabled(codec_num==0);
+  codec_status_label->setDisabled(codec_num==0);
+}
+
+
+void CodecWidget::setBusy(unsigned codec_num,bool state)
+{
+  if(codec_num==codec_codec_number) {
+    codec_status_light->setStatus(state);
+  }
 }
 
 

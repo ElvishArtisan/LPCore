@@ -353,3 +353,9 @@
 2014-05-01 Fred Gleason <fredg@paravelsystems.com>
 	* Added a 'LpSwitcher::TypeDummy' value to the 'LPSwitcher::Type
 	enum in 'lib/lpcore/lpswitcher.cpp' and 'lib/lpcore/lpswitcher.h'.
+2014-05-01 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'StatusLight' widget in 'lpcodecpool/statuslight.cpp'
+	and 'lpcodecpool/statuslight.h'.
+	* Implemented a 'Display Message' ['MB'] command in
+	'lpcodecpool/lpcodecpool.cpp' and 'lpcodecpool/lpcodecpanel.cpp'.
+	* Implemented codec locking in 'lpcodecpool/lpcodecpool.cpp'.

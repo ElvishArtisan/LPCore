@@ -29,6 +29,8 @@
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
 
+#include "statuslight.h"
+
 class CodecWidget : public QFrame
 {
   Q_OBJECT
@@ -40,6 +42,7 @@ class CodecWidget : public QFrame
   void setPortName(const QString &str);
   void setCodecName(unsigned codec_num,const QString &str);
   void setCodec(unsigned codec_num);
+  void setBusy(unsigned codec_num,bool state);
 
  signals:
   void codecChanged(unsigned port_num,unsigned codec_num);
@@ -52,6 +55,8 @@ class CodecWidget : public QFrame
  private:
   QLabel *codec_label_label;
   QLabel *codec_state_label;
+  StatusLight *codec_status_light;
+  QLabel *codec_status_label;
   QComboBox *codec_codec_box;
   QPushButton *codec_take_button;
   unsigned codec_port_number;

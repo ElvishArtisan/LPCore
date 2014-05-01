@@ -161,6 +161,7 @@ void MainWidget::ProcessMessage(const QStringList &msg)
   QString str;
   unsigned port;
   unsigned codecs;
+  bool state=false;
 
   if(msg[0]=="GC") {
     switch(msg.size()) {
@@ -212,6 +213,14 @@ void MainWidget::ProcessMessage(const QStringList &msg)
 	}
       }
 
+      if(msg[1]=="B") {
+	codecs=msg[2].toUInt(&ok);
+	state=msg[3].toUInt()!=0;
+	for(unsigned i=0;i<lp_codec_widgets.size();i++) {
+	  lp_codec_widgets[i]->setBusy(codecs,state);
+	}
+      }
+
       if(msg[1]=="I") {
 	port=msg[2].toUInt(&ok)-1;
 	if(ok&&(port<lp_codec_widgets.size())) {
@@ -232,6 +241,12 @@ void MainWidget::ProcessMessage(const QStringList &msg)
     }
   }
 
+  if(msg[0]=="MB") {
+    for(int i=1;i<msg.size();i++) {
+      str+=msg[i]+" ";
+    }
+    QMessageBox::warning(this,"LPCodecPanel - "+tr("Message"),str);
+  }
 }
 
 

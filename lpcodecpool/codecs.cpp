@@ -31,8 +31,9 @@ Codecs::Codecs(LPProfile *p)
     codec_names.push_back(name);
     codec_switcher_outputs.push_back(p->intValue(section,"SwitcherOutput")-1);
     codec_switcher_inputs.push_back(p->intValue(section,"SwitcherInput")-1);
-    codec_gpio_lines.push_back(p->intValue(section,"GpioLine"));
-    codec_busy_in_rooms.push_back(-1);
+    codec_gpio_lines.push_back(p->intValue(section,"GpioLine")-1);
+    codec_busys.push_back(false);
+    codec_connected_to_rooms.push_back(-1);
     count++;
     section=QString().sprintf("Codec%u",count);
     name=p->stringValue(section,"Name","",&ok);
@@ -106,13 +107,25 @@ int Codecs::codecByGpio(int line) const
 }
 
 
-int Codecs::busyInRoom(unsigned n) const
+bool Codecs::isBusy(unsigned n) const
 {
-  return codec_busy_in_rooms[n];
+  return codec_busys[n];
 }
 
 
-void Codecs::setBusyInRoom(unsigned n,int room_num)
+void Codecs::setBusy(unsigned n,bool state)
 {
-  codec_busy_in_rooms[n]=room_num;
+  codec_busys[n]=state;
+}
+
+
+int Codecs::connectedToRoom(unsigned n) const
+{
+  return codec_connected_to_rooms[n];
+}
+
+
+void Codecs::setConnectedToRoom(unsigned n,int room_num)
+{
+  codec_connected_to_rooms[n]=room_num;
 }

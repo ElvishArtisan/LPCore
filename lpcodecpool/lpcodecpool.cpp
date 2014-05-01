@@ -149,6 +149,10 @@ MainObject::MainObject(QObject *parent)
   upper_limits[MainObject::SX]=2;
   lower_limits[MainObject::SX]=2;
 
+  cmds[MainObject::MB]="MB";
+  upper_limits[MainObject::MB]=0;
+  lower_limits[MainObject::MB]=2;
+
   lp_server=
     new LPStreamCmdServer(cmds,upper_limits,lower_limits,server,this);
   connect(lp_server,SIGNAL(commandReceived(int,int,const QStringList &)),
@@ -216,6 +220,7 @@ void MainObject::outputCrosspointChangedData(int id,int output,int input)
     return;
   }
   lp_rooms->setCodec(room_num,port_num,codec_num);
+  lp_codecs->setConnectedToRoom(codec_num,room_num);
 
   //
   // Notify Clients
@@ -226,6 +231,19 @@ void MainObject::outputCrosspointChangedData(int id,int output,int input)
 
 void MainObject::gpiChangedData(int id,int line,bool state)
 {
+  //printf("gpiChangedData(%d,%d,%d)\n",id,line,state);
+
+  QStringList oargs;
+  int codec_num=lp_codecs->codecByGpio(line);
+  if(codec_num<0) {
+    return;
+  }
+  lp_codecs->setBusy(codec_num,state);
+  oargs.clear();
+  oargs.push_back("B");
+  oargs.push_back(QString().sprintf("%d",codec_num+1));
+  oargs.push_back(QString().sprintf("%d",state));
+  lp_server->sendCommand((int)MainObject::GC,oargs);
 }
 
 
@@ -258,7 +276,7 @@ void MainObject::commandReceivedData(int id,int cmd,const QStringList &args)
       oargs.clear();
       oargs.push_back("B");
       oargs.push_back(QString().sprintf("%u",i+1));
-      oargs.push_back(QString().sprintf("%u",1+lp_codecs->busyInRoom(i)));
+      oargs.push_back(QString().sprintf("%u",lp_codecs->isBusy(i)));
       lp_server->sendCommand(id,(int)MainObject::GC,oargs);
     }
 
@@ -279,6 +297,20 @@ void MainObject::commandReceivedData(int id,int cmd,const QStringList &args)
   case MainObject::SX:
     codec_num=args[0].toUInt(&ok)-1;
     if(ok&&(codec_num<lp_codecs->codecQuantity())) {
+      if(lp_codecs->isBusy(codec_num)) {
+	oargs.clear();
+	oargs.push_back(tr("Codec"));
+	oargs.push_back(lp_codecs->name(codec_num));
+	if((room_num=lp_codecs->connectedToRoom(codec_num))<0) {
+	  oargs.push_back(tr("is currently in use elsewhere."));
+	}
+	else {
+	  oargs.push_back(tr("is currently in use in"));
+	  oargs.push_back(lp_rooms->name(room_num)+".");
+	}
+	lp_server->sendCommand(id,(int)MainObject::MB,oargs);
+	return;
+      }
       port_num=args[1].toUInt(&ok)-1;
       if(ok&&(port_num<lp_rooms->portQuantity(room_num))) {
 	lp_devices->inputSwitcher()->
@@ -288,9 +320,13 @@ void MainObject::commandReceivedData(int id,int cmd,const QStringList &args)
 	  setCrosspoint(lp_rooms->switcherOutput(room_num,port_num),
 			lp_codecs->switcherInput(codec_num));
 	lp_rooms->setCodec(room_num,port_num,codec_num);
+	lp_codecs->setConnectedToRoom(codec_num,room_num);
 	UpdateClients();
       }
     }
+    break;
+
+  case MainObject::MB:
     break;
   }
 }

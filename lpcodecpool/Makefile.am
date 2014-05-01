@@ -38,9 +38,11 @@ dist_lpcodecpool_SOURCES = codecs.cpp codecs.h\
 nodist_lpcodecpool_SOURCES = moc_lpcodecpool.cpp
 
 dist_lpcodecpanel_SOURCES = codecwidget.cpp codecwidget.h\
-                            lpcodecpanel.cpp lpcodecpanel.h
+                            lpcodecpanel.cpp lpcodecpanel.h\
+                            statuslight.cpp statuslight.h
 nodist_lpcodecpanel_SOURCES = moc_codecwidget.cpp\
-                              moc_lpcodecpanel.cpp
+                              moc_lpcodecpanel.cpp\
+                              moc_statuslight.cpp
 
 lpcodecpool_LDADD = @CLI_LPLIBS@
 lpcodecpool_LDFLAGS = @CLI_LPFLAGS@

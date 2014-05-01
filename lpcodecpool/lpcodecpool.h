@@ -49,7 +49,7 @@ class MainObject : public QObject
 {
  Q_OBJECT;
  public:
-  enum PanelCommand {DC=0,GC=1,SX=2};
+ enum PanelCommand {DC=0,GC=1,SX=2,MB=3};
   MainObject(QObject *parent=0);
 
  private slots:
