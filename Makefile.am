@@ -38,6 +38,11 @@ SUBDIRS = conf\
           lpswitch\
           xdg
 
+ACLOCAL_AMFLAGS = -I m4
+
+maintainer-clean-local:	
+	rm -rf m4
+
 install-exec-local:	
 	mkdir -p ${DESTDIR}/etc/init.d
 	cp rc.lpcored ${DESTDIR}/etc/init.d/lpcored
