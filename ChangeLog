@@ -372,3 +372,9 @@
 	'configure.ac'.
 2014-09-08 Fred Gleason <fredg@paravelsystems.com>
 	* Updated 'get_distro.sh' to detect RHEL 7 correctly.
+2014-09-08 Fred Gleason <fredg@paravelsystems.com>
+	* Cleaned up warnings in 'lpcodecpool/lpcodecpanel.cpp'.
+	* Cleaned up warnings in 'lpcored/ae_engine.cpp'.
+	* Cleaned up warnings in 'lpcored/lpcored.cpp'.
+	* Cleaned up warnings in 'lpcored/switcher_engine.cpp'.
+	* Cleaned up warnings in 'lpnetrouter/lppanel.cpp'.

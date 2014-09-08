@@ -845,9 +845,9 @@ void MainObject::sendFullState(int id)
 
 void MainObject::SendLoginQuery(int id)
 {
-  char msg[3]={0x02,0x01,0xF9};
+  uint8_t msg[3]={0x02,0x01,0xF9};
 
-  main_connections[id]->writeOverride(msg,3);
+  main_connections[id]->writeOverride((char *)msg,3);
 }
 
 

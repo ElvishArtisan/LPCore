@@ -100,8 +100,8 @@ int AeEngine::write(const char *data,int len) const
 
 void AeEngine::reset()
 {
-  char msg[7]={0x02,0x05,0x84,0x12,0x00,0x01,0xAA};
-  write(msg,7);
+  uint8_t msg[7]={0x02,0x05,0x84,0x12,0x00,0x01,0xAA};
+  write((char *)msg,7);
   engine_reset_timer->start(LPCORE_STARTUP_TIMEOUT_INTERVAL);
 }
 

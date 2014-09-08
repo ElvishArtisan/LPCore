@@ -301,7 +301,6 @@ void MainWidget::SendToServer(const QString &msg)
 int main(int argc,char *argv[])
 {
   QApplication a(argc,argv);
-  Qt::WFlags flags=0;
 
   //
   // Start Event Loop

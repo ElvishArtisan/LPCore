@@ -272,7 +272,6 @@ QString MainWidget::Rejoin(const QStringList &strs,int start_at)
 int main(int argc,char *argv[])
 {
   QApplication a(argc,argv);
-  Qt::WFlags flags=0;
 
   //
   // Start Event Loop

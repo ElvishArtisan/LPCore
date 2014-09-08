@@ -81,7 +81,7 @@ int SwitcherEngine::write(const char *data,int len) const
 
 void SwitcherEngine::reset()
 {
-  for(unsigned i=0;i<switch_switcher->gpis();i++) {
+  for(int i=0;i<switch_switcher->gpis();i++) {
     gpiChangedData(0,i,switch_switcher->gpiState(i));
   }
   switch_is_reset=true;
