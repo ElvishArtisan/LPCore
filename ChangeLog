@@ -385,3 +385,6 @@
 2014-12-02 Fred Gleason <fredg@paravelsystems.com>
 	* Modified 'lpcored/lpcored.cpp' to process LP1 engine reset
 	complete messages [02 03 B2 02 FF] correctly.
+2014-12-02 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the library version to 7:0:7.
+	* Incremented the package version to 1.7.0.
