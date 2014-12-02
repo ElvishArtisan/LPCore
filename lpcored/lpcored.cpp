@@ -400,6 +400,12 @@ void MainObject::engineResetData(int engine,bool state)
 	applicationStartData();
       }
     }
+    if(main_config->startupCodes(engine).size()>0) {
+      connectionMessageReceivedData(-1,LPMessage(main_config->
+						 startupCodes(engine)));
+      syslog(LOG_DEBUG,"sent %u bytes of startup codes for engine %d",
+	     main_config->startupCodes(engine).size(),engine);
+    }
   }
   else {
     syslog(LOG_WARNING,"engine %d failed to reset",engine);
@@ -414,10 +420,13 @@ void MainObject::connectionMessageReceivedData(int id,const LPMessage &msg)
   char lp2[256];
   int chan;
   Engine *e=NULL;
-  Connection *conn=main_connections[id];
+  Connection *conn=NULL;
+  if(id>=0) {
+    conn=main_connections[id];
+  }
   SourceDevice *dev;
 
-  if(!conn->authenticated()) {
+  if((conn!=NULL)&&(!conn->authenticated())) {
     switch(0xFF&msg[2]) {
     case 0xF9:   // Login
       if((msg.size()==36)&&((0xFF&msg[3])==LPCORE_VGUEST_ID)) {
@@ -485,7 +494,9 @@ void MainObject::connectionMessageReceivedData(int id,const LPMessage &msg)
 	  lp2[5]=msg[5];
 	  lp2[6]=msg[6];
 	  lp2[7]=msg[8];
-	  conn->write(lp2,8);
+	  if(conn!=NULL) {
+	    conn->write(lp2,8);
+	  }
 	  ok=true;
 	  break;
 
@@ -501,7 +512,9 @@ void MainObject::connectionMessageReceivedData(int id,const LPMessage &msg)
 	  lp2[7]=msg[3];   // FIXME: Is this always the same engine?
 	  lp2[8]=0xFF&(dev->device()>>8);
 	  lp2[9]=0xFF&dev->device();
-	  conn->write(lp2,10);
+	  if(conn!=NULL) {
+	    conn->write(lp2,10);
+	  }
 	  ok=true;
 	  break;
 
@@ -514,7 +527,9 @@ void MainObject::connectionMessageReceivedData(int id,const LPMessage &msg)
 	  lp2[5]=msg[5];
 	  lp2[6]=msg[6];
 	  lp2[7]=0xFF&dev->mode();
-	  conn->write(lp2,8);
+	  if(conn!=NULL) {
+	    conn->write(lp2,8);
+	  }
 	  ok=true;
 	  break;
 
@@ -527,7 +542,9 @@ void MainObject::connectionMessageReceivedData(int id,const LPMessage &msg)
 	  lp2[5]=msg[5];
 	  lp2[6]=msg[6];
 	  lp2[7]=0xFF&dev->faderLevel();
-	  conn->write(lp2,8);
+	  if(conn!=NULL) {
+	    conn->write(lp2,8);
+	  }
 	  ok=true;
 	  break;
 	}
@@ -704,22 +721,34 @@ void MainObject::connectionMessageReceivedData(int id,const LPMessage &msg)
 
   default:
     if(msg.size()==(msg[1]+2)) {
-      syslog(LOG_DEBUG,"received unrecognized LP2 message from %s:%d: %s",
-	     (const char *)conn->
-	     peerAddress().toString().toAscii(),
-	     0xFFFF&conn->peerPort(),
-	     (const char *)LPParser::dump(msg).toAscii());
+      if(conn==NULL) {
+	syslog(LOG_DEBUG,"received unrecognized LP2 startup message: %s",
+	       (const char *)LPParser::dump(msg).toAscii());
+      }
+      else {
+	syslog(LOG_DEBUG,"received unrecognized LP2 message from %s:%d: %s",
+	       (const char *)conn->
+	       peerAddress().toString().toAscii(),
+	       0xFFFF&conn->peerPort(),
+	       (const char *)LPParser::dump(msg).toAscii());
+      }
       ok=true;
     }
     break;
   }
 
   if(!ok) {
-    syslog(LOG_WARNING,"received unrecognized/corrupt message from %s:%d: %s",
-	   (const char *)conn->
-	   peerAddress().toString().toAscii(),
-	   0xFFFF&conn->peerPort(),
-	   (const char *)LPParser::dump(msg).toAscii());
+    if(conn==NULL) {
+      syslog(LOG_WARNING,"received unrecognized/corrupt startup message: %s",
+	     (const char *)LPParser::dump(msg).toAscii());
+    }
+    else {
+      syslog(LOG_WARNING,"received unrecognized/corrupt message from %s:%d: %s",
+	     (const char *)conn->
+	     peerAddress().toString().toAscii(),
+	     0xFFFF&conn->peerPort(),
+	     (const char *)LPParser::dump(msg).toAscii());
+    }
   }
 }
 

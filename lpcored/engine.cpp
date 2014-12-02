@@ -116,6 +116,12 @@ Engine::~Engine()
 }
 
 
+void Engine::reset()
+{
+  resetDevice();
+}
+
+
 int Engine::engineNumber() const
 {
   return engine_number;

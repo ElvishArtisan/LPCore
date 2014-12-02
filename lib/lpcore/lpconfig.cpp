@@ -20,7 +20,7 @@
 //   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 
-#include "lpprofile.h"
+#include <syslog.h>
 
 #include "lpconfig.h"
 
@@ -107,6 +107,12 @@ bool LPConfig::applicationRespawn(unsigned n) const
 }
 
 
+QByteArray LPConfig::startupCodes(unsigned engine)
+{
+  return lp_startup_codes[engine];
+}
+
+
 bool LPConfig::load()
 {
   unsigned count=0;
@@ -133,6 +139,7 @@ bool LPConfig::load()
     lp_engine_switcher_ids.
       push_back(p->intValue("Engines",QString().sprintf("SwitcherId%u",
 					 count+1)));
+    LoadStartupCodes(p,engine);
     count++;
     engine=p->intValue("Engines",QString().sprintf("Number%u",count+1),0,&ok);
   }
@@ -175,4 +182,31 @@ void LPConfig::clear()
 int LPConfig::surfaceByChannel(uint8_t chan)
 {
   return lp_surface_map[chan];
+}
+
+
+void LPConfig::LoadStartupCodes(LPProfile *p,int engine)
+{
+  QString section=QString().sprintf("Startup%d",engine);
+  unsigned line=0;
+  bool ok=false;
+  bool ok2=false;
+  QString code;
+
+  code=p->stringValue(section,QString().sprintf("Code%u",line+1),"",&ok);
+  while(ok) {
+    QStringList f0=code.split(" ");
+    for(int i=0;i<f0.size();i++) {
+      uint8_t byte=f0[i].toUInt(&ok2,16);
+      if((!ok2)||(f0[i].length()!=2)) {
+	syslog(LOG_ERR,"malformatted code line \"%s\" in [%s] section",
+	       (const char *)code.toAscii(),
+	       (const char *)section.toAscii());
+	exit(256);
+      }
+      lp_startup_codes[engine].append(byte);
+    }
+    line++;
+    code=p->stringValue(section,QString().sprintf("Code%u",line+1),"",&ok);
+  }
 }

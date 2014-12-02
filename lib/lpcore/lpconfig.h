@@ -25,10 +25,13 @@
 
 #include <stdint.h>
 
+#include <map>
 #include <vector>
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+
+#include <lpcore/lpprofile.h>
 
 #define LPCORE_CONF_FILE "/etc/lp/lpcore.conf"
 #define LPCORE_ENGINE_SERIAL_SPEED 38400
@@ -57,11 +60,13 @@ class LPConfig
   QString applicationCommand(unsigned n) const;
   QStringList applicationArguments(unsigned n) const;
   bool applicationRespawn(unsigned n) const;
+  QByteArray startupCodes(unsigned engine);
   bool load();
   void clear();
   static int surfaceByChannel(uint8_t chan);
 
  private:
+  void LoadStartupCodes(LPProfile *p,int engine);
   std::vector<int> lp_engine_numbers;
   std::vector<QString> lp_engine_types;
   std::vector<QString> lp_engine_serial_devices;
@@ -69,6 +74,7 @@ class LPConfig
   std::vector<QString> lp_application_commands;
   std::vector<QStringList> lp_application_arguments;
   std::vector<bool> lp_application_respawns;
+  std::map<int,QByteArray> lp_startup_codes;
 };
 
 

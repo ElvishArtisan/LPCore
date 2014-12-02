@@ -378,3 +378,7 @@
 	* Cleaned up warnings in 'lpcored/lpcored.cpp'.
 	* Cleaned up warnings in 'lpcored/switcher_engine.cpp'.
 	* Cleaned up warnings in 'lpnetrouter/lppanel.cpp'.
+2014-12-02 Fred Gleason <fredg@paravelsystems.com>
+	* Added an 'LPMessage(const QByteArray &) constructor in
+	'lib/lpcore/lpmessage.cpp' and 'lib/lpcore/lpmessage.h'.
+	* Added support for [Startup<engine>] sections to lpcore.conf(5).

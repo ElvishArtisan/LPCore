@@ -40,6 +40,7 @@ class LPMessage : public QByteArray
   LPMessage();
   LPMessage(const char *str);
   LPMessage(const char *data,int size);
+  LPMessage(const QByteArray &data);
   LPMessage::Lp2Command command() const;
   int engine() const;
   int sourceEngine() const;

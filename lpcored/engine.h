@@ -29,6 +29,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
+#include <QtCore/QTimer>
 
 #include <lpcore/lpconfig.h>
 #include <lpcore/lpmessage.h>
@@ -66,12 +67,12 @@ class Engine : public QObject
   enum Type {LogitekAeType=0,SwitcherType=1};
   Engine(LPConfig *config,unsigned n,QObject *parent=NULL);
   ~Engine();
+  void reset();
   virtual Engine::Type type() const=0;
   virtual bool isReset() const=0;
   virtual bool open()=0;
   virtual int write(const QByteArray &data) const=0;
   virtual int write(const char *data,int len) const=0;
-  virtual void reset()=0;
   int engineNumber() const;
   SourceDevice *sourceDevice(uint8_t chan);
   SourceDevice *sourceDevice(int device,int surface);
@@ -87,6 +88,7 @@ class Engine : public QObject
   void resetFinished(int engine,bool state);
 
  protected:
+  virtual void resetDevice()=0;
   LPConfig *config();
 
  private:

@@ -36,7 +36,9 @@ class AeEngine : public Engine
   bool open();
   int write(const QByteArray &data) const;
   int write(const char *data,int len) const;
-  void reset();
+
+ protected:
+  void resetDevice();
 
  private slots:
   void messageReceivedData(const LPMessage &msg);

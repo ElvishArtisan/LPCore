@@ -20,6 +20,8 @@
 //   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
 
+#include <syslog.h>
+
 #include <lpcore/lpswitcherfactory.h>
 
 #include "switcher_engine.h"
@@ -79,7 +81,7 @@ int SwitcherEngine::write(const char *data,int len) const
 }
 
 
-void SwitcherEngine::reset()
+void SwitcherEngine::resetDevice()
 {
   for(int i=0;i<switch_switcher->gpis();i++) {
     gpiChangedData(0,i,switch_switcher->gpiState(i));

@@ -80,6 +80,12 @@ LPMessage::LPMessage(const char *data,int size)
 }
 
 
+LPMessage::LPMessage(const QByteArray &data)
+  : QByteArray(data)
+{
+}
+
+
 LPMessage::Lp2Command LPMessage::command() const
 {
   return (LPMessage::Lp2Command)at(2);
