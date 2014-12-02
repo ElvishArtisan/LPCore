@@ -28,11 +28,13 @@ depcomp
 install-sh
 libtool
 ltmain.sh
+m4
 missing
 
 # Derived Files
 lpcore.pc
 lpcore.spec
+rc.lpcodecpool
 rc.lpcored
 
 # Binaries
