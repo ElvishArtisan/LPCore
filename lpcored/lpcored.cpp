@@ -302,6 +302,7 @@ void MainObject::engineMessageReceivedData(int engine,const QByteArray &msg)
       lp2[7]=msg[4];
       SendClientMessage(lp2,8);
       ok=true;
+      CheckForReset(engine,msg);
     }
     break;
 
@@ -399,12 +400,6 @@ void MainObject::engineResetData(int engine,bool state)
 	main_application_timer->stop();
 	applicationStartData();
       }
-    }
-    if(main_config->startupCodes(engine).size()>0) {
-      connectionMessageReceivedData(-1,LPMessage(main_config->
-						 startupCodes(engine)));
-      syslog(LOG_DEBUG,"sent %u bytes of startup codes for engine %d",
-	     main_config->startupCodes(engine).size(),engine);
     }
   }
   else {
@@ -867,6 +862,19 @@ void MainObject::sendFullState(int id)
 	  }
 	}
       }
+    }
+  }
+}
+
+
+void MainObject::CheckForReset(int engine,const LPMessage &msg)
+{
+  if(((0xFF&msg[3])==0x02)&&((0xFF&msg[4])==0xFF)) {
+    if(main_config->startupCodes(engine).size()>0) {
+      connectionMessageReceivedData(-1,LPMessage(main_config->
+						 startupCodes(engine)));
+      syslog(LOG_DEBUG,"sent %u bytes of startup codes for engine %d",
+	     main_config->startupCodes(engine).size(),engine);
     }
   }
 }

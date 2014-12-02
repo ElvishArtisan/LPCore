@@ -382,3 +382,6 @@
 	* Added an 'LPMessage(const QByteArray &) constructor in
 	'lib/lpcore/lpmessage.cpp' and 'lib/lpcore/lpmessage.h'.
 	* Added support for [Startup<engine>] sections to lpcore.conf(5).
+2014-12-02 Fred Gleason <fredg@paravelsystems.com>
+	* Modified 'lpcored/lpcored.cpp' to process LP1 engine reset
+	complete messages [02 03 B2 02 FF] correctly.

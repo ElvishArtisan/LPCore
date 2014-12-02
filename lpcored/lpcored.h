@@ -56,6 +56,7 @@ class MainObject : public QObject
   void sendFullState(int id);
 
  private:
+  void CheckForReset(int engine,const LPMessage &msg);
   void SendLoginQuery(int id);
   int GetDeviceChannel(uint8_t engine,uint8_t dev_byte1,uint8_t dev_byte2,
 		       uint8_t surface);

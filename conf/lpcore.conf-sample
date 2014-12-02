@@ -57,8 +57,8 @@ Respawn1=Yes
 ; number.
 ;
 ; The listed LP2 codes will be sent every time the engine is reset or when
-; receiving an 'on' command from device 0x0002 on buss 255
-; [code 02 06 52 <num> 00 02 00 FF].
+; receiving an 'ON' command from device 0x0002 on buss 255
+; [LP1 code 02 03 B2 02 FF].
 ;
 ; [Startup1]
 ; Code1=02 06 52 01 14 01 02
