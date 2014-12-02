@@ -53,12 +53,12 @@ uninstall-local:
 	rm -f ${DESTDIR}/etc/init.d/lpcodecpool
 
 rpm:	dist
-	cp lpcore-$(VERSION).tar.gz $(RPM_ROOT)/SOURCES/
+	cp lpcore-$(VERSION).tar.gz $(HOME)/rpmbuild/SOURCES/
 	$(RPMBUILD) -ba --target $(ARCH)-$(VENDOR)-linux lpcore.spec
-	mv $(RPM_ROOT)/RPMS/$(ARCH)/lpcore-*.rpm $(top_srcdir)/
-	mv $(RPM_ROOT)/SRPMS/lpcore-*.src.rpm $(top_srcdir)/
-	rm $(RPM_ROOT)/SOURCES/lpcore-$(VERSION).tar.gz
-	rm -rf $(RPM_ROOT)/BUILD/lpcore-$(VERSION)
+	mv $(HOME)/rpmbuild/RPMS/$(ARCH)/lpcore-*.rpm $(top_srcdir)/
+	mv $(HOME)/rpmbuild/SRPMS/lpcore-*.src.rpm $(top_srcdir)/
+	rm $(HOME)/rpmbuild/SOURCES/lpcore-$(VERSION).tar.gz
+	rm -rf $(HOME)/rpmbuild/BUILD/lpcore-$(VERSION)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = lpcore.pc
