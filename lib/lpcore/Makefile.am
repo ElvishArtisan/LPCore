@@ -48,6 +48,7 @@ dist_liblpcore_la_SOURCES = lpcmdswitch.cpp lpcmdswitch.h\
                             switcher_btss82.cpp switcher_btss82.h\
                             switcher_dummy.cpp switcher_dummy.h\
                             switcher_gpio.cpp switcher_gpio.h\
+                            switcher_sas16000.cpp switcher_sas16000.h\
                             switcher_zephyrclassic.cpp switcher_zephyrclassic.h\
                             switcher_zephyrxtreme.cpp switcher_zephyrxtreme.h
 
@@ -60,6 +61,7 @@ nodist_liblpcore_la_SOURCES = moc_lpconnection.cpp\
                               moc_switcher_btss82.cpp\
                               moc_switcher_dummy.cpp\
                               moc_switcher_gpio.cpp\
+                              moc_switcher_sas16000.cpp\
                               moc_switcher_zephyrclassic.cpp\
                               moc_switcher_zephyrxtreme.cpp
 

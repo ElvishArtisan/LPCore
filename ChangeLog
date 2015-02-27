@@ -392,3 +392,7 @@
 	* Fixed a bug in 'Makefile.am' that broke the 'make rpm' target.
 2014-12-02 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 1.7.1.
+2015-02-27 Fred Gleason <fredg@paravelsystems.com>
+	* Added support for an Sierra Automated Systems model 16000D
+	router in 'lib/lpcore/switcher_sas16000.cpp' and
+	'lib/lpcore/switcher_sas16000.h'.

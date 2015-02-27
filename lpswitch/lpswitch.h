@@ -38,7 +38,7 @@
 #include "dialer.h"
 #include "gpiindicator.h"
 
-#define LPSWITCH_USAGE "[options]\n\n--hostname=<hostname>\n     Connect to the device at <hostname>\n\n--device=<device>\n     Connect to the switcher device at <device>\n\n--type=<type-num>\n     Switcher driver to use.  The following values are recognized:\n          0 - Broadcast Tools SS 8.2\n          1 - 360 Systems AM16/B\n          2 - Telos Zephyr Digital Network Audio Transceiver\n          3 - Telos Zephyr XStream Digital Network Audio Transceiver\n          4 - GPIO driver-driven GPIO devices\n"
+#define LPSWITCH_USAGE "[options]\n\n--hostname=<hostname>\n     Connect to the device at <hostname>\n\n--device=<device>\n     Connect to the switcher device at <device>\n\n--type=<type-num>\n     Switcher driver to use.  The following values are recognized:\n          0 - Broadcast Tools SS 8.2\n          1 - 360 Systems AM16/B\n          2 - Telos Zephyr Digital Network Audio Transceiver\n          3 - Telos Zephyr XStream Digital Network Audio Transceiver\n          4 - GPIO driver-driven GPIO devices\n          5 - Dummy Switcher Driver\n          6 - SAS 16000(D) Switcher\n"
 
 class MainWidget : public QWidget
 {

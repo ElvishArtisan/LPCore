@@ -66,7 +66,6 @@ in the Broadcast Tools documentation), then you will also need to be sure
 that DIP switch SW-14-10 is ON, whereas leaving it OFF allows crosspoints
 to be selected by means of closures at these inputs.
 
-
 ----------------------------------------------------------------------------
 Dummy Switcher Device
 
@@ -84,6 +83,17 @@ GENERAL NOTES:
 Cards supported by the 'gpio' kernel driver package.
 
 ----------------------------------------------------------------------------
+SAS 16000(D) Router
+
+Type ID: 6
+
+GENERAL NOTES:
+Control is done by means of an RS-232C connection to the 'User Serial Interface'
+connector on the back of the unit (three wire, straight through).  Serial
+port parameters should be set to 9600 bits/sec, no parity, 8 data bits,
+1 stop bit.
+
+----------------------------------------------------------------------------
 Telos Zephyr Classic Digital Network Audio Tranceiver
 
 Type ID: 2
@@ -93,7 +103,6 @@ Control is done by means of an RS-232C connection to the 'RS232 REMOTE'
 connector on the back of the unit (three wire, null modem).  Default 
 serial port speed on the Zephyr is 9600.  Serial port parameters should
 be set to no parity, 8 data bits, 1 stop bit.
-
 
 ----------------------------------------------------------------------------
 Telos Zephyr Xtreme Digital Network Audio Tranceiver

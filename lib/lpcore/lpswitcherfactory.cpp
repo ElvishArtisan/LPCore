@@ -4,8 +4,6 @@
 //
 //   (C) Copyright 2013 Fred Gleason <fredg@paravelsystems.com>
 //
-//      $Id: lpswitcherfactory.cpp,v 1.5 2013/09/09 16:42:57 cvs Exp $
-//
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
 //   published by the Free Software Foundation.
@@ -27,6 +25,7 @@
 #include "switcher_btss82.h"
 #include "switcher_dummy.h"
 #include "switcher_gpio.h"
+#include "switcher_sas16000.h"
 #include "switcher_zephyrclassic.h"
 #include "switcher_zephyrxtreme.h"
 
@@ -59,6 +58,10 @@ LPSwitcher *LPSwitcherFactory(int id,LPSwitcher::Type type,QObject *parent)
 
   case LPSwitcher::TypeZephyrXtreme:
     ret=new ZephyrXtreme(id,parent);
+    break;
+
+  case LPSwitcher::TypeSas16000:
+    ret=new Sas16000(id,parent);
     break;
 
   case LPSwitcher::TypeLast:

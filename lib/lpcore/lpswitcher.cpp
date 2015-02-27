@@ -225,6 +225,10 @@ QString LPSwitcher::typeString(LPSwitcher::Type type)
     ret=tr("Dummy Switcher");
     break;
 
+  case LPSwitcher::TypeSas16000:
+    ret=tr("SAS 16000(D)");
+    break;
+
   case LPSwitcher::TypeLast:
     break;
   }
